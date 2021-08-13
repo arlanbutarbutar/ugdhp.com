@@ -1,0 +1,36 @@
+# Hidden extention .php
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+</IfModule> 
+
+# Hidden extention .html
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html
+</IfModule>
+
+# Redirect domain non www -> www
+#RewriteCond %{HTTP_HOST} !^www.ugdhp.com$ [NC]
+#RewriteRule ^(.*)$ http://www.ugdhp.com/$1 [L,R=301]
+
+# Redirect user ke 404 Not Found
+ErrorDocument 404 http://localhost/ugdhpcom/ugdhpcom_v28.2/404
+IndexIgnore *.gif *.zip *.txt *.png *.php *.mp4
+
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php70___lsphp .php .php7 .phtml
+</IfModule>
+
+# Redirect user ke 403 Maintenance
+#order deny,allow
+#deny from all
+#allow from 192.168.1.1
+#ErrorDocument 403 /ugdhpcom_v28.2/403
+#<Files halamanredirect.html>
+#  allow from all
+#</Files> 

