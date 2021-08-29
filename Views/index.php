@@ -33,119 +33,76 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
                         </div>
                         <?php }?>
                         <div class="row justify-content-md-center">
+
                             <?php if($_SESSION['id-role']<=2){?>
-                            <div class="col-12 mb-4">
-                                <div class="card bg-yellow-alt shadow-sm">
-                                    <div class="card-header d-flex flex-row align-items-center flex-0">
-                                        <div class="d-block">
-                                            <div class="h5 font-weight-normal mb-2">Revenue value</div>
-                                            <h2 class="h3">Rp. <?= number_format($income)?></h2>
-                                            <div class="small mt-2">
-                                                <span class="font-weight-bold mr-2">Month <?= date('M');?></span>
-                                                <span class="fas fa-angle-<?= $iconPer?> text-<?= $colorPer?>"></span>
-                                                <span class="text-<?= $colorPer?> font-weight-bold"><?= $incomePer?>%</span>
+                            <!-- == Revenue value == -->
+                                <div class="col-12 mb-4">
+                                    <div class="card bg-yellow-alt shadow-sm">
+                                        <div class="card-header d-flex flex-row align-items-center flex-0">
+                                            <div class="d-block">
+                                                <div class="h5 font-weight-normal mb-2">Revenue value</div>
+                                                <h2 class="h3">Rp. <?= number_format($income)?></h2>
+                                                <div class="small mt-2">
+                                                    <span class="font-weight-bold mr-2">Month <?= date('M');?></span>
+                                                    <span class="fas fa-angle-<?= $iconPer?> text-<?= $colorPer?>"></span>
+                                                    <span class="text-<?= $colorPer?> font-weight-bold"><?= $incomePer?>% <?= $statusPer;?></span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body p-2">
-                                        <p>Chart not yet available</p>
-                                        <!-- <div class="ct-chart-income-value ct-double-octave ct-series-g"></div> -->
+                                        <div class="card-body p-2">
+                                            <p>Chart not yet available</p>
+                                            <!-- <div class="ct-chart-income-value ct-double-octave ct-series-g"></div> -->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <!-- == end of Revenue value == -->
+
                             <?php }if($_SESSION['id-role']<=3){?>
-                            <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                                <div class="card border-light shadow-sm">
-                                    <div class="card-body">
-                                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                                            <div class="carousel-inner">
-                                                <div class="carousel-item active">
-                                                    <div class="row d-block d-xl-flex align-items-center">
-                                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                                            <a href="users">
-                                                                <div class="icon icon-shape icon-md icon-shape-blue mr-4 mr-sm-0 round"><i class="fas fa-user-md fa-2x"></i></div>
-                                                            </a>
-                                                            <div class="d-sm-none">
-                                                                <h2 class="h5">Customers</h2>
-                                                                <h5 class="mb-1"><?= $userView?></h5>
+                            <!-- == Card Info == -->
+                                <!-- ++ Customers/Repair -->
+                                <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                                    <div class="card border-light shadow-sm">
+                                        <div class="card-body">
+                                            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <div class="row d-block d-xl-flex align-items-center">
+                                                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                                                <a href="users">
+                                                                    <div class="icon icon-shape icon-md icon-shape-blue mr-4 mr-sm-0 round"><i class="fas fa-user-md fa-2x"></i></div>
+                                                                </a>
+                                                                <div class="d-sm-none">
+                                                                    <h2 class="h5">Customers</h2>
+                                                                    <h5 class="mb-1"><?= $userView?></h5>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-12 col-xl-7 px-xl-0">
-                                                            <div class="d-none d-sm-block">
-                                                                <h2 class="h5">Customers</h2>
-                                                                <h5 class="mb-1"><?= $userView?></h5>
+                                                            <div class="col-12 col-xl-7 px-xl-0">
+                                                                <div class="d-none d-sm-block">
+                                                                    <h2 class="h5">Customers</h2>
+                                                                    <h5 class="mb-1"><?= $userView?></h5>
+                                                                </div>
+                                                                <small><?= $rowStartUsers?> - Now,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> WorldWide</small>
                                                             </div>
-                                                            <small><?= $rowStartUsers?> - Now,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> WorldWide</small>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <div class="row d-block d-xl-flex align-items-center">
-                                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                                            <a href="users">
-                                                                <div class="icon icon-shape icon-md icon-shape-blue mr-4 mr-sm-0 round"><i class="fas fa-tools fa-2x"></i></div>
-                                                            </a>
-                                                            <div class="d-sm-none">
-                                                                <h2 class="h5">Repair</h2>
-                                                                <h5 class="mb-1"><?= $userRepair?></h5>
+                                                    <div class="carousel-item">
+                                                        <div class="row d-block d-xl-flex align-items-center">
+                                                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                                                <a href="nota-tinggal">
+                                                                    <div class="icon icon-shape icon-md icon-shape-blue mr-4 mr-sm-0 round"><i class="fas fa-tools fa-2x"></i></div>
+                                                                </a>
+                                                                <div class="d-sm-none">
+                                                                    <h2 class="h5">Repair</h2>
+                                                                    <h5 class="mb-1"><?= $userRepair?></h5>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-12 col-xl-7 px-xl-0">
-                                                            <div class="d-none d-sm-block">
-                                                                <h2 class="h5">Repair</h2>
-                                                                <h5 class="mb-1"><?= $userRepair?></h5>
+                                                            <div class="col-12 col-xl-7 px-xl-0">
+                                                                <div class="d-none d-sm-block">
+                                                                    <h2 class="h5">Repair</h2>
+                                                                    <h5 class="mb-1"><?= $userRepair?></h5>
+                                                                </div>
+                                                                <small><?= $rowStartUsers?> - Now,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> WorldWide</small>
                                                             </div>
-                                                            <small><?= $rowStartUsers?> - Now,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> WorldWide</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                                <div class="card border-light shadow-sm">
-                                    <div class="card-body">
-                                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                                            <div class="carousel-inner">
-                                                <div class="carousel-item active">
-                                                    <div class="row d-block d-xl-flex align-items-center">
-                                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                                            <a href="revenue">
-                                                                <div class="icon icon-shape icon-md icon-shape-secondary mr-4 round"><i class="fas fa-money-bill-wave fa-2x"></i></div>
-                                                            </a>
-                                                            <div class="d-sm-none">
-                                                                <h2 class="h5">Income</h2>
-                                                                <h5 class="mb-1">Rp.<?= $valueIncomeInfo?></h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-xl-7 px-xl-0">
-                                                            <div class="d-none d-sm-block">
-                                                                <h2 class="h5">Income</h2>
-                                                                <h5 class="mb-1">Rp. <?= $valueIncomeInfo?></h5>
-                                                            </div>
-                                                            <small><?= $rowStartInEx?> - Now,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> Worldwide</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <div class="row d-block d-xl-flex align-items-center">
-                                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                                            <a href="revenue">
-                                                                <div class="icon icon-shape icon-md icon-shape-secondary mr-4 round"><i class="fas fa-file-invoice-dollar fa-2x"></i></div>
-                                                            </a>
-                                                            <div class="d-sm-none">
-                                                                <h2 class="h5">Expense</h2>
-                                                                <h5 class="mb-1">Rp.<?= $valueExpenseInfo?></h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-xl-7 px-xl-0">
-                                                            <div class="d-none d-sm-block">
-                                                                <h2 class="h5">Expense</h2>
-                                                                <h5 class="mb-1">Rp. <?= $valueExpenseInfo?></h5>
-                                                            </div>
-                                                            <small><?= $rowStartInEx?> - Now,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> Worldwide</small>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,26 +110,100 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                                <div class="card border-light shadow-sm">
-                                    <div class="card-body">
-                                        <div class="row d-block d-xl-flex align-items-center">
-                                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                                <a href="repair">
-                                                    <div class="icon icon-shape icon-md icon-shape-danger mr-4 round"><span class="fas fa-chart-pie"></span></div>
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-xl-7 px-xl-0">
-                                                <h2 class="h5 mb-3">Total Repair</h2>
-                                                <h6 class="font-weight-normal text-gray"><span class="icon w-20 icon-xs icon-secondary mr-1"><span class="fas fa-mobile-alt"></span></span> Handphone <a href="#" class="h6"><?= $countTotalRepairHP?></a></h6>
-                                                <h6 class="font-weight-normal text-gray"><span class="icon w-20 icon-xs icon-primary mr-1"><span class="fas fa-desktop"></span></span> Laptop <a href="#" class="h6"><?= $countTotalRepairLaptop?></a></h6>
+                                <!-- ++ Income/Expense -->
+                                <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                                    <div class="card border-light shadow-sm">
+                                        <div class="card-body">
+                                            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <div class="row d-block d-xl-flex align-items-center">
+                                                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                                                <a href="report-day">
+                                                                    <div class="icon icon-shape icon-md icon-shape-secondary mr-4 round"><i class="fas fa-money-bill-wave fa-2x"></i></div>
+                                                                </a>
+                                                                <div class="d-sm-none">
+                                                                    <h2 class="h5">Income</h2>
+                                                                    <h5 class="mb-1">Rp.<?= $valueIncomeInfo?></h5>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-xl-7 px-xl-0">
+                                                                <div class="d-none d-sm-block">
+                                                                    <h2 class="h5">Income</h2>
+                                                                    <h5 class="mb-1">Rp. <?= $valueIncomeInfo?></h5>
+                                                                </div>
+                                                                <small><?= $rowStartInEx?> - Now,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> Worldwide</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="row d-block d-xl-flex align-items-center">
+                                                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                                                <a href="report-expense">
+                                                                    <div class="icon icon-shape icon-md icon-shape-secondary mr-4 round"><i class="fas fa-file-invoice-dollar fa-2x"></i></div>
+                                                                </a>
+                                                                <div class="d-sm-none">
+                                                                    <h2 class="h5">Expense</h2>
+                                                                    <h5 class="mb-1">Rp.<?= $valueExpenseInfo?></h5>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-xl-7 px-xl-0">
+                                                                <div class="d-none d-sm-block">
+                                                                    <h2 class="h5">Expense</h2>
+                                                                    <h5 class="mb-1">Rp. <?= $valueExpenseInfo?></h5>
+                                                                </div>
+                                                                <small><?= $rowStartInEx?> - Now,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> Worldwide</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <!-- ++ Total Repair/Notes -->
+                                <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                                    <div class="card border-light shadow-sm">
+                                        <div class="card-body">
+                                            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <div class="row d-block d-xl-flex align-items-center">
+                                                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                                                <a href="nota-tinggal">
+                                                                    <div class="icon icon-shape icon-md icon-shape-danger mr-4 round"><span class="fas fa-chart-pie"></span></div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-12 col-xl-7 px-xl-0">
+                                                                <h2 class="h5">Total Repair</h2>
+                                                                <h6 class="font-weight-normal text-gray"><span class="icon w-20 icon-xs icon-secondary mr-1"><span class="fas fa-mobile-alt"></span></span> Handphone <a href="#" class="h6"><?= $countTotalRepairHP?></a></h6>
+                                                                <h6 class="font-weight-normal text-gray mb-4"><span class="icon w-20 icon-xs icon-primary mr-1"><span class="fas fa-desktop"></span></span> Laptop <a href="#" class="h6"><?= $countTotalRepairLaptop?></a></h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="row d-block d-xl-flex align-items-center">
+                                                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                                                <a href="nt-grading">
+                                                                    <div class="icon icon-shape icon-md icon-shape-danger mr-4 round"><i class="fas fa-chart-line fa-2x"></i></div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-12 col-xl-7 px-xl-0 mt-n1">
+                                                                <h2 class="h5">Total Notes</h2>
+                                                                <h6 class="font-weight-normal text-gray"><span class="icon w-20 icon-xs icon-secondary mr-1"><span class="fas fa-tools"></span></span> Nota Semua <a href="#" class="h6"><?= $countNotesT?></a></h6>
+                                                                <h6 class="font-weight-normal text-gray"><span class="icon w-20 icon-xs icon-primary mr-1"><span class="fas fa-recycle"></span></span> Nota Batal <a href="#" class="h6"><?= $countNotesB?></a></h6>
+                                                                <small class="text-<?= $colorNotes?>"><i class="fas fa-angle-<?= $iconNotes?>"></i> <?= $totalNotesPer?>% <?= $textNotes?></small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- == end of Card Info == -->
                             <?php }?>
+
                         </div>
                         <div class="row flex-row-reverse">
                             <?php if($_SESSION['id-role']<=3){?>
@@ -195,9 +226,9 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
                                                                 </div>
                                                             </div>
                                                         </div>  
-                                                        <div class="small mt-2">                               
-                                                            <span class="fas fa-angle-<?= $iconPerSparepart?> text-<?= $colorPerSparepart?>"></span>
-                                                            <span class="text-<?= $colorPerSparepart?> font-weight-bold"><?= $sparepartsTotalPer?>%</span>
+                                                        <div class="small mt-2 d-flex flex-nowrap">
+                                                            <span class="fas fa-angle-<?= $iconPerSparepart?> m-auto text-<?= $colorPerSparepart?>"></span>
+                                                            <span class="ml-1 text-<?= $colorPerSparepart?> font-weight-bold d-flex flex-nowrap"><?= $sparepartsTotalPer?>% <div class="ml-2 text-<?= $statusCol_PerSparepart?>"><?= $statusPerSparepart?></div></span>
                                                         </div>
                                                     </div>
                                                     <div class="d-block ml-auto">

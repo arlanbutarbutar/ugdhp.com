@@ -57,6 +57,25 @@ $_SESSION['page-name']="Laporan DP";$_SESSION['page-to']="report-dp";
                                                                         </div>
                                                                     </div>
                                                                 </form>
+                                                                <?php if($_SESSION['id-role']==3){if($_SESSION['id-category']==1){?>
+                                                                <form action="" method="POST">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="text" name="hp" class="form-control" placeholder="Cari handphone">
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-hp-dp"><i class="fas fa-search"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <?php }if($_SESSION['id-category']==2){?>
+                                                                <form action="" method="POST">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="text" name="laptop" class="form-control" placeholder="Cari laptop">
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-laptop-dp"><i class="fas fa-search"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <?php }}else if($_SESSION['id-role']!=3){?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
                                                                         <input type="text" name="hp" class="form-control" placeholder="Cari handphone">
@@ -73,6 +92,7 @@ $_SESSION['page-name']="Laporan DP";$_SESSION['page-to']="report-dp";
                                                                         </div>
                                                                     </div>
                                                                 </form>
+                                                                <?php }?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
                                                                         <input type="date" name="tgl" class="form-control" placeholder="Tanggal">
@@ -145,8 +165,9 @@ $_SESSION['page-name']="Laporan DP";$_SESSION['page-to']="report-dp";
                                                                             <h5 class="modal-title" id="exampleModalLabel">Barcode T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <img src="../Assets/img/img-qrcode-notes/<?= $row['barcode']?>" alt="barcode" id="print" style="width: 40%">
+                                                                        <div class="modal-body" id="print">
+                                                                            <img src="../Assets/img/img-qrcode-notes/<?= $row['barcode']?>" alt="barcode" style="width: 40%">
+                                                                            <img src="../Assets/img/img-qrcode-notes/<?= $row['barcode']?>" alt="barcode" style="width: 40%">
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>

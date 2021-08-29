@@ -57,6 +57,25 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                         </div>
                                                                     </div>
                                                                 </form>
+                                                                <?php if($_SESSION['id-role']==3){if($_SESSION['id-category']==1){?>
+                                                                <form action="" method="POST">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="text" name="hp" class="form-control" placeholder="Cari handphone">
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-hp-lunas"><i class="fas fa-search"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <?php }if($_SESSION['id-category']==2){?>
+                                                                <form action="" method="POST">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="text" name="laptop" class="form-control" placeholder="Cari laptop">
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-laptop-lunas"><i class="fas fa-search"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <?php }}else if($_SESSION['id-role']!=3){?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
                                                                         <input type="text" name="hp" class="form-control" placeholder="Cari handphone">
@@ -73,6 +92,7 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                         </div>
                                                                     </div>
                                                                 </form>
+                                                                <?php }?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
                                                                         <input type="date" name="tgl" class="form-control" placeholder="Tanggal">
@@ -129,6 +149,26 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                     <div class='form-group mt-3'>
                                                                         <input type="text" name="alamat" placeholder="Alamat" class="form-control text-center">
                                                                     </div>
+                                                                    <?php if($_SESSION['id-role']==3){if($_SESSION['id-category']==1){?>
+                                                                        <input type="hidden" name="id-layanan" value="1">
+                                                                        <div class="form-group mt-3">
+                                                                            <input type="text" name="type" placeholder="Type" class="form-control text-center">
+                                                                        </div>
+                                                                        <div class="form-group mt-3">
+                                                                            <input type="text" name="seri-hp" placeholder="Seri" class="form-control text-center">
+                                                                        </div>
+                                                                        <div class="form-group mt-3">
+                                                                            <input type="text" name="imei" placeholder="Imei" class="form-control text-center">
+                                                                        </div>
+                                                                    <?php }if($_SESSION['id-category']==2){?>
+                                                                        <input type="hidden" name="id-layanan" value="2">
+                                                                        <div class="form-group mt-3">
+                                                                            <input type="text" name="merek" placeholder="Merek" class="form-control text-center">
+                                                                        </div>
+                                                                        <div class="form-group mt-3">
+                                                                            <input type="text" name="seri-laptop" placeholder="Seri" class="form-control text-center">
+                                                                        </div>
+                                                                    <?php }}else if($_SESSION['id-role']!=3){?>
                                                                     <div class='form-group mt-3'>
                                                                         <select name="id-layanan" class="form-control" required>
                                                                             <option>Pilih layanan</option>
@@ -166,6 +206,7 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                             <input type="text" name="seri-laptop" placeholder="Seri" class="form-control text-center">
                                                                         </div>
                                                                     </div>
+                                                                    <?php }?>
                                                                     <div class='form-group mt-3'>
                                                                         <input type="text" name="kerusakan" placeholder="Kerusakan" class="form-control text-center" required>
                                                                         <small class="text-danger">Wajib*</small>
@@ -184,10 +225,6 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                             <?php endforeach;?>
                                                                         </select>   
                                                                         <small class="text-danger">Wajib*</small>
-                                                                    </div>
-                                                                    <div class='form-group mt-3'>
-                                                                        <label for="tgl-ambil">Tgl Ambil</label>
-                                                                        <input type="date" name="tgl-ambil" id="tgl-ambil" class="form-control text-center">
                                                                     </div>
                                                                     <div class='form-group mt-3'>
                                                                         <input type="number" name="dp" placeholder="DP" class="form-control text-center">
@@ -280,20 +317,126 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                             <h5 class="modal-title" id="exampleModalLabel">Ubah data T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                         </div>
+                                                                        <?php if($_SESSION['id-role']==3){if($row['tgl_cari']==$today && $row['id_nota_lunas']==0){?>
                                                                         <form action="" method="POST">
                                                                             <input type="hidden" name="id-data" value="<?= $row['id_data']?>">
                                                                             <input type="hidden" name="id-barang" value="<?= $row['id_barang']?>">
                                                                             <input type="hidden" name="id-nota-tinggal-old" value="<?= $row['id_nota_tinggal']?>">
                                                                             <input type="hidden" name="id-nota-dp-old" value="<?= $row['id_nota_dp']?>">
+                                                                            <input type="hidden" name="id-nota-lunas-old" value="<?= $row['id_nota_lunas']?>">
+                                                                            <input type="hidden" name="tgl-cari" value="<?= $row['tgl_cari']?>">
                                                                             <div class="modal-body">
                                                                                 <div class='form-group'>
+                                                                                    <label>Nota Tinggal</label>
                                                                                     <input type="number" name="nota-tinggal" value="<?= $row['id_nota_tinggal']?>" placeholder="Nomor nota tinggal" class="form-control text-center">
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
+                                                                                    <label>Nota DP</label>
                                                                                     <input type="number" name="nota-dp" value="<?= $row['id_nota_dp']?>" placeholder="Nomor nota dp" class="form-control text-center">
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
-                                                                                    <input type="number" name="nota-lunas" placeholder="Nomor nota lunas" class="form-control text-center" required>
+                                                                                    <label>Nota Lunas</label>
+                                                                                    <input type="number" name="nota-lunas" value="<?= $row['id_nota_lunas']?>" placeholder="Nomor nota lunas" class="form-control text-center" required>
+                                                                                    <small class="text-danger">Wajib*</small>
+                                                                                </div>
+                                                                                <?php $id_barang=$row['id_barang']; if($_SESSION['id-category']==1){$handphone=mysqli_query($conn_back, "SELECT * FROM handphone WHERE id_hp='$id_barang'");$row_hp=mysqli_fetch_assoc($handphone);?>
+                                                                                    <input type="hidden" name="id-layanan" value="1">
+                                                                                    <div class="form-group mt-3">
+                                                                                        <label>Type</label>
+                                                                                        <input type="text" name="type" value="<?= $row_hp['type']?>" placeholder="Type" class="form-control text-center">
+                                                                                    </div>
+                                                                                    <div class="form-group mt-3">
+                                                                                        <label>Seri</label>
+                                                                                        <input type="text" name="seri-hp" value="<?= $row_hp['seri']?>" placeholder="Seri" class="form-control text-center">
+                                                                                    </div>
+                                                                                    <div class="form-group mt-3">
+                                                                                        <label>Imei</label>
+                                                                                        <input type="text" name="imei" value="<?= $row_hp['imei']?>" placeholder="Imei" class="form-control text-center">
+                                                                                    </div>
+                                                                                <?php }if($_SESSION['id-category']==2){$laptop=mysqli_query($conn_back, "SELECT * FROM laptop WHERE id_laptop='$id_barang'");$row_laptop=mysqli_fetch_assoc($laptop);?>
+                                                                                    <input type="hidden" name="id-layanan" value="2">
+                                                                                    <div class="form-group mt-3">
+                                                                                        <label>Merek</label>
+                                                                                        <input type="text" name="merek" value="<?= $row_laptop['merek']?>" placeholder="Merek" class="form-control text-center">
+                                                                                    </div>
+                                                                                    <div class="form-group mt-3">
+                                                                                        <label>Seri</label>
+                                                                                        <input type="text" name="seri-laptop" value="<?= $row_laptop['seri']?>" placeholder="Seri" class="form-control text-center">
+                                                                                    </div>
+                                                                                <?php }?>
+                                                                                <div class='form-group mt-3'>
+                                                                                    <label>kerusakan</label>
+                                                                                    <input type="text" name="kerusakan" value="<?= $row['kerusakan']?>" placeholder="Kerusakan" class="form-control text-center" required>
+                                                                                </div>
+                                                                                <div class='form-group mt-3'>
+                                                                                    <label>Kondisi</label>
+                                                                                    <input type="text" name="kondisi" value="<?= $row['kondisi']?>" placeholder="Kondisi" class="form-control text-center">
+                                                                                </div>
+                                                                                <div class='form-group mt-3'>
+                                                                                    <label>Kelengkapan</label>
+                                                                                    <input type="text" name="kelengkapan" value="<?= $row['kelengkapan']?>" placeholder="Kelengkapan" class="form-control text-center">
+                                                                                </div>
+                                                                                <div class='form-group mt-3'>
+                                                                                    <select name="id-teknisi" class="form-control" required>
+                                                                                        <option>Pilih teknisi</option>
+                                                                                        <?php foreach($users_teknisi as $row_teknisi):?>
+                                                                                            <option value="<?= $row_teknisi['id_user']?>"><?= $row_teknisi['first_name']?></option>
+                                                                                        <?php endforeach;?>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class='form-group mt-3'>
+                                                                                    <label for="tgl-ambil">Tgl Ambil</label>
+                                                                                    <input type="date" name="tgl-ambil" value="<?= $row['tgl_ambil']?>" id="tgl-ambil" class="form-control text-center">
+                                                                                </div>
+                                                                                <div class='form-group mt-3'>
+                                                                                    <label>Biaya DP</label>
+                                                                                    <input type="number" name="dp" value="<?= $row['dp']?>" placeholder="DP" class="form-control text-center">
+                                                                                </div>
+                                                                                <div class='form-group mt-3'>
+                                                                                    <label>Biaya Perbaikan</label>
+                                                                                    <input type="number" name="biaya" value="<?= $row['biaya']?>" placeholder="Biaya" class="form-control text-center" required>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                                <button type="submit" name="edit-notes-lunas" class="btn btn-warning btn-sm shadow"><i class="fas fa-pen"></i> Ubah</button>
+                                                                            </div>
+                                                                        </form>
+                                                                        <?php }else if($row['tgl_cari']!=$today){?>
+                                                                        <form action="" method="POST">
+                                                                            <input type="hidden" name="id-data" value="<?= $row['id_data']?>">
+                                                                            <input type="hidden" name="id-nota-lunas-old" value="<?= $row['id_nota_lunas']?>">
+                                                                            <div class="modal-body">
+                                                                                <div class='form-group mt-3'>
+                                                                                    <label>Nota Lunas</label>
+                                                                                    <input type="number" name="nota-lunas" value="<?= $row['id_nota_lunas']?>" placeholder="Nomor nota lunas" class="form-control text-center" required>
+                                                                                    <small class="text-danger">Wajib*</small>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                                <button type="submit" name="edit-noNotes-lunas" class="btn btn-warning btn-sm shadow"><i class="fas fa-pen"></i> Ubah</button>
+                                                                            </div>
+                                                                        </form>
+                                                                        <?php }}else if($_SESSION['id-role']!=3){?>
+                                                                        <form action="" method="POST">
+                                                                            <input type="hidden" name="id-data" value="<?= $row['id_data']?>">
+                                                                            <input type="hidden" name="id-barang" value="<?= $row['id_barang']?>">
+                                                                            <input type="hidden" name="id-nota-tinggal-old" value="<?= $row['id_nota_tinggal']?>">
+                                                                            <input type="hidden" name="id-nota-dp-old" value="<?= $row['id_nota_dp']?>">
+                                                                            <input type="hidden" name="id-nota-lunas-old" value="<?= $row['id_nota_lunas']?>">
+                                                                            <div class="modal-body">
+                                                                                <div class='form-group'>
+                                                                                    <label>Nota Tinggal</label>
+                                                                                    <input type="number" name="nota-tinggal" value="<?= $row['id_nota_tinggal']?>" placeholder="Nomor nota tinggal" class="form-control text-center">
+                                                                                </div>
+                                                                                <div class='form-group mt-3'>
+                                                                                    <label>Nota DP</label>
+                                                                                    <input type="number" name="nota-dp" value="<?= $row['id_nota_dp']?>" placeholder="Nomor nota dp" class="form-control text-center">
+                                                                                </div>
+                                                                                <div class='form-group mt-3'>
+                                                                                    <label>Nota Lunas</label>
+                                                                                    <input type="number" name="nota-lunas" value="<?= $row['id_nota_lunas']?>" placeholder="Nomor nota lunas" class="form-control text-center" required>
                                                                                     <small class="text-danger">Wajib*</small>
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
@@ -338,12 +481,15 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                                 </div>
                                                                                 <?php }?>
                                                                                 <div class='form-group mt-3'>
+                                                                                    <label>kerusakan</label>
                                                                                     <input type="text" name="kerusakan" value="<?= $row['kerusakan']?>" placeholder="Kerusakan" class="form-control text-center" required>
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
+                                                                                    <label>Kondisi</label>
                                                                                     <input type="text" name="kondisi" value="<?= $row['kondisi']?>" placeholder="Kondisi" class="form-control text-center">
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
+                                                                                    <label>Kelengkapan</label>
                                                                                     <input type="text" name="kelengkapan" value="<?= $row['kelengkapan']?>" placeholder="Kelengkapan" class="form-control text-center">
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
@@ -359,9 +505,11 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                                     <input type="date" name="tgl-ambil" value="<?= $row['tgl_ambil']?>" id="tgl-ambil" class="form-control text-center">
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
+                                                                                    <label>Biaya DP</label>
                                                                                     <input type="number" name="dp" value="<?= $row['dp']?>" placeholder="DP" class="form-control text-center">
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
+                                                                                    <label>Biaya Perbaikan</label>
                                                                                     <input type="number" name="biaya" value="<?= $row['biaya']?>" placeholder="Biaya" class="form-control text-center" required>
                                                                                 </div>
                                                                             </div>
@@ -370,6 +518,7 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                                 <button type="submit" name="edit-notes-lunas" class="btn btn-warning btn-sm shadow"><i class="fas fa-pen"></i> Ubah</button>
                                                                             </div>
                                                                         </form>
+                                                                        <?php }?>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -394,7 +543,8 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                                 <input type="hidden" name="id-barang" value="<?= $row['id_barang']?>">
                                                                                 <input type="hidden" name="id-layanan" value="<?= $row['id_layanan']?>">
                                                                                 <input type="hidden" name="barcode" value="<?= $row['barcode']?>">
-                                                                                <button type="submit" name="delete-notes" class="btn btn-danger btn-sm shadow"><i class="fas fa-trash"></i> Hapus</button>
+                                                                                <input type="hidden" name="tgl-cari" value="<?= $row['tgl_cari']?>">
+                                                                                <button type="submit" name="delete-notesLunas" class="btn btn-danger btn-sm shadow"><i class="fas fa-trash"></i> Hapus</button>
                                                                             </form>
                                                                         </div>
                                                                     </div>
@@ -417,6 +567,7 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                             <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
                                                                             <form action="" method="POST">
                                                                                 <input type="hidden" name="id-data" value="<?= $row['id_data']?>">
+                                                                                <input type="hidden" name="kerusakan" value="<?= $row['kerusakan']?>">
                                                                                 <button type="submit" name="notes-report" class="btn btn-success btn-sm shadow"><i class="fas fa-check-double"></i> Lapor</button>
                                                                             </form>
                                                                         </div>
@@ -437,8 +588,9 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                             <h5 class="modal-title" id="exampleModalLabel">Barcode T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <img src="../Assets/img/img-qrcode-notes/<?= $row['barcode']?>" alt="barcode" id="print" style="width: 40%">
+                                                                        <div class="modal-body" id="print">
+                                                                            <img src="../Assets/img/img-qrcode-notes/<?= $row['barcode']?>" alt="barcode" style="width: 40%">
+                                                                            <img src="../Assets/img/img-qrcode-notes/<?= $row['barcode']?>" alt="barcode" style="width: 40%">
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>

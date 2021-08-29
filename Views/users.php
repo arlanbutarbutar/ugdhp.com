@@ -60,7 +60,9 @@ $_SESSION['page-name']="Users Management";$_SESSION['page-to']="users";
                                             <thead>
                                                 <tr style="border-top:hidden">
                                                     <th scope="col">No</th>
+                                                    <?php if($_SESSION['id-role']<=2){?>
                                                     <th scope="col">Data encrypt</th>
+                                                    <?php }?>
                                                     <th scope="col">Icon</th>
                                                     <th scope="col">Nama depan</th>
                                                     <th scope="col">Nama belakang</th>
@@ -73,6 +75,7 @@ $_SESSION['page-name']="Users Management";$_SESSION['page-to']="users";
                                                     <th scope="col">Role</th>
                                                     <th scope="col">Status</th>
                                                     <th scope="col">Akses</th>
+                                                    <th scope="col">Tools</th>
                                                     <th scope="col">Tgl Buat</th>
                                                     <?php if($_SESSION['id-access']==1){?>
                                                     <th colspan="2">Aksi</th>
@@ -88,7 +91,9 @@ $_SESSION['page-name']="Users Management";$_SESSION['page-to']="users";
                                                 <?php }else if(mysqli_num_rows($users_data)>0){while($row=mysqli_fetch_assoc($users_data)){?>
                                                     <tr>
                                                         <th scope="row"><?= $no;?></th>
+                                                        <?php if($_SESSION['id-role']<=2){?>
                                                         <td scope="row"><?= $row['data_encrypt'];?></td>
+                                                        <?php }?>
                                                         <td scope="row"><img src="../Assets/img/img-users/<?= $row['img']?>" alt="icon profile" class="rounded-circle" style="width: 40px"></td>
                                                         <td scope="row"><?= $row['first_name']?></td>
                                                         <td scope="row"><?= $row['last_name']?></td>
@@ -101,6 +106,7 @@ $_SESSION['page-name']="Users Management";$_SESSION['page-to']="users";
                                                         <td scope="row"><?= $row['role']?></td>
                                                         <td scope="row"><?= $row['status']?></td>
                                                         <td scope="row"><?= $row['access']?></td>
+                                                        <td scope="row"><?= $row['tools']?></td>
                                                         <td scope="row"><?= $row['date_created']?></td>
                                                         <?php if($_SESSION['id-access']==1){?>
                                                         <td>
@@ -138,6 +144,27 @@ $_SESSION['page-name']="Users Management";$_SESSION['page-to']="users";
                                                                                         <option value="<?= $row2['id_access']?>"><?= $row2['access']?></option>
                                                                                         <?php endforeach;?>
                                                                                     </select>
+                                                                                </div>
+                                                                                <div class="form-group mt-3">
+                                                                                    <select name="id-tools" class="form-control">
+                                                                                        <option>Pilih Tools</option>
+                                                                                        <?php foreach($users_tools as $row3):?>
+                                                                                        <option value="<?= $row3['id_tools']?>"><?= $row3['tools']?></option>
+                                                                                        <?php endforeach;?>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group mt-3">
+                                                                                    <select name="id-category" class="form-control">
+                                                                                        <option>Pilih Kategori Service</option>
+                                                                                        <?php foreach($category_service as $row4):?>
+                                                                                        <option value="<?= $row4['id_category']?>"><?= $row4['product']?></option>
+                                                                                        <?php endforeach;?>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group mt-3">
+                                                                                    <label for="id-console">Console Access</label>
+                                                                                    <input type="number" name="id-keyConsole" id="id-console" value="<?= $row['data_encrypt']?>" class="form-control">
+                                                                                    <small class="text-danger">*Masukan Data Encrypting</small>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">

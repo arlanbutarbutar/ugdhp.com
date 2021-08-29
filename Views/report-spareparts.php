@@ -148,16 +148,26 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                             <form action="" method="POST">
                                                                 <div class="modal-body">
                                                                     <p>Masukan data Spareparts.</p>
-                                                                    <div class="form-group">
-                                                                        <input type="text" name="ket" placeholder="Sparepart" class="form-control">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-10">
+                                                                            <div class="form-group">
+                                                                                <select name="suplayer" class="form-control" required>
+                                                                                    <option>Pilih Penyuplai</option>
+                                                                                    <?php foreach($supplier as $row_sp):?>
+                                                                                    <option value="<?= $row_sp['supplier']?>"><?= $row_sp['supplier']?></option>
+                                                                                    <?php endforeach;?>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-2">
+                                                                            <div class="form-group">
+                                                                                <button type="button" class="btn btn-primary shadow ml-n3" data-toggle="modal" data-target="#tambah-suplayer"><i class="fas fa-plus"></i></button>
+                                                                                <button type="button" class="btn btn-link btn-sm ml-n1" data-toggle="tooltip" data-placement="top" title="Jika sparepart yg ingin kamu masukan tidak ada dalam daftar, kamu bisa menambahkannya! data akan masuk namun tetap akan dicek admin 2/48."><i class="fas fa-question-circle text-info"></i></button>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <select name="suplayer" class="form-control" required>
-                                                                            <option>Pilih Penyuplai</option>
-                                                                            <?php foreach($supplier as $row_sp):?>
-                                                                            <option value="<?= $row_sp['supplier']?>"><?= $row_sp['supplier']?></option>
-                                                                            <?php endforeach;?>
-                                                                        </select>
+                                                                        <input type="text" name="ket" placeholder="Sparepart" class="form-control">
                                                                     </div>
                                                                     <div class="form-group mt-3">
                                                                         <input type="number" name="jumlah" placeholder="Jumlah barang" class="form-control mt-3">
@@ -191,6 +201,30 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                 </div>
                                             <!-- == end of New == -->
                                             
+                                            <!-- == New Sparepart == -->
+                                                <div class="modal fade" id="tambah-suplayer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header border-bottom-0">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Suplayer Baru</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form action="" method="POST">
+                                                                <div class="modal-body">
+                                                                    <input type="text" name="suplayer" class="form-control text-center" placeholder="Suplayer Baru" required>
+                                                                </div>
+                                                                <div class="modal-footer border-top-0 justify-content-center">
+                                                                    <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                    <button type="submit" name="tambah-suplayer" class="btn btn-success btn-sm shadow"><i class="fas fa-plus"></i> Tambah</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <!-- == end of New Sparepart == -->
+
                                         </div>
                                     </div>
                                 </div>
@@ -245,6 +279,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                         </div>
                                                                         <form action="" method="POST">
                                                                             <input type="hidden" name="id-sparepart" value="<?= $row['id_sparepart']?>">
+                                                                            <input type="hidden" name="tgl-cari" value="<?= $row['tgl_cari']?>">
                                                                             <div class="modal-body text-center">
                                                                                 <div class="form-group">
                                                                                     <input type="text" name="ket" value="<?= $row['ket']?>" placeholder="Sparepart" class="form-control">
@@ -313,42 +348,29 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <?php if($row['status_sparepart']<=2){?>
-                                                            <button type="button" class="btn btn-primary btn-sm shadow" data-toggle="modal" data-target="#status<?= $row['id_sparepart']?>"><i class="fas fa-star-half-alt"></i> Status</button>
-                                                            <div class="modal fade" id="status<?= $row['id_sparepart']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <?php if($row['status_sparepart']==1){?>
+                                                            <a href="select-note?ids=<?= $row['id_sparepart']?>&jb=<?= $row['jmlh_barang']?>" class="btn btn-warning btn-sm shadow"><i class="fas fa-notes-medical"></i> Nota</a>
+                                                            <?php }else if($row['status_sparepart']==2){?>
+                                                            <button type="button" class="btn btn-success btn-sm shadow" data-toggle="modal" data-target="#lapor<?= $row['id_sparepart']?>"><i class="fas fa-book-medical"></i> Lapor</button>
+                                                            <div class="modal fade" id="lapor<?= $row['id_sparepart']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header border-bottom-0">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Ubah Status <?= $row['ket']?></h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                         </div>
-                                                                        <form action="" method="POST">
-                                                                            <input type="hidden" name="id-sparepart" value="<?= $row['id_sparepart']?>">
-                                                                            <input type="hidden" name="jmlh-barang" value="<?= $row['jmlh_barang']?>">
-                                                                            <div class="modal-body text-center">
-                                                                                <?php if($row['status_sparepart']==1){?>
-                                                                                <div class="form-group">
-                                                                                    <select name="id-user" class="form-control" required>
-                                                                                        <option>Pilih Nota</option>
-                                                                                        <?php foreach($notaSparepart as $rowNot):?>
-                                                                                        <option value="<?= $rowNot['id_user']?>"><?= "T".$rowNot['id_nota_tinggal']." | DP".$rowNot['id_nota_dp']." | L".$rowNot['id_nota_lunas']?></option>
-                                                                                        <?php endforeach;?>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <?php }else if($row['status_sparepart']==2){?>
-                                                                                    <p>Silakan pilih tombol dibawah ini.<br>Jika sparepart yang dipakai batal maka tekan batal <br> dan jika dipakai tekan lapor.</p>
-                                                                                <?php }?>
-                                                                            </div>
-                                                                            <div class="modal-footer border-top-0 justify-content-center">
-                                                                                <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
-                                                                                <?php if($row['status_sparepart']==1){?>
-                                                                                <button type="submit" name="sparepartTerpakai" class="btn btn-primary btn-sm shadow"><i class="fas fa-star-half-alt"></i> Pakai</button>
-                                                                                <?php }else if($row['status_sparepart']==2){?>
-                                                                                    <button type="submit" name="sparepartBatal" class="btn btn-danger btn-sm shadow"><i class="far fa-times-circle"></i> Batal</button>
-                                                                                    <button type="submit" name="sparepartDipakai" class="btn btn-success btn-sm shadow"><i class="fas fa-plus"></i> Lapor</button>
-                                                                                <?php }?>
-                                                                            </div>
-                                                                        </form>
+                                                                        <div class="modal-body text-center">
+                                                                            <p class="text-center">Silakan pilih tombol dibawah ini.<br>Jika sparepart yang dipakai batal maka tekan batal <br> dan jika dipakai tekan lapor.</p>
+                                                                        </div>
+                                                                        <div class="modal-footer border-top-0 m-auto">
+                                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
+                                                                            <form action="" method="POST">
+                                                                                <input type="hidden" name="id-sparepart" value="<?= $row['id_sparepart']?>">
+                                                                                <input type="hidden" name="qrcode" value="<?= $row['qrcode']?>">
+                                                                                <button type="submit" name="sparepartBatal" class="btn btn-danger btn-sm shadow ml-1"><i class="far fa-times-circle"></i> Batal</button>
+                                                                                <button type="submit" name="sparepartDipakai" class="btn btn-success btn-sm shadow ml-2"><i class="fas fa-plus"></i> Lapor</button>
+                                                                            </form>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -390,8 +412,8 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                         </div>
                                                                         <div class="modal-body text-center">
-                                                                            <?php $id_nota_sp=$row['id_nota'];
-                                                                            $notes_sp=mysqli_query($conn_back, "SELECT * FROM notes WHERE id_nota_tinggal='$id_nota_sp' OR id_nota_lunas='$id_nota_sp'");
+                                                                            <?php $id_userSp=$row['id_user'];
+                                                                            $notes_sp=mysqli_query($conn_back, "SELECT * FROM notes WHERE id_user='$id_userSp'");
                                                                             if(mysqli_num_rows($notes_sp)>0){$row_sp=mysqli_fetch_assoc($notes_sp);
                                                                             ?>
                                                                             <p class="font-weight-bold h4">T<?= $row_sp['id_nota_tinggal']?> | DP<?= $row_sp['id_nota_dp']?> | L<?= $row_sp['id_nota_lunas']?></p>

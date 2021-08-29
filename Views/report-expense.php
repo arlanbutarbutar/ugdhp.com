@@ -146,7 +146,7 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                         <td><?= $row['ket']?></td>
                                                         <td>Rp. <?= number_format($row['biaya_pengeluaran'])?></td>
                                                         <td><?= $row['tgl_pengeluaran']?></td>
-                                                        <?php if($_SESSION['id-role']<=5){?>
+                                                        <?php if($_SESSION['id-role']<=2){?>
                                                         <td><?= $row['time']?></td>
                                                         <?php }?>
                                                         <td>
@@ -160,6 +160,7 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                                         </div>
                                                                         <form action="" method="POST">
                                                                             <input type="hidden" name="id-pengeluaran" value="<?= $row['id_pengeluaran']?>">
+                                                                            <input type="hidden" name="tgl-cari" value="<?= $row['tgl_cari']?>">
                                                                             <div class="modal-body">
                                                                                 <div class='form-group'>
                                                                                     <input type="text" name="jenis" value="<?= $row['jenis_pengeluaran']?>" placeholder="Jenis Pengeluaran" class="form-control text-center" required>
@@ -199,6 +200,7 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                                             <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
                                                                             <form action="" method="POST">
                                                                                 <input type="hidden" name="id-pengeluaran" value="<?= $row['id_pengeluaran']?>">
+                                                                                <input type="hidden" name="tgl-cari" value="<?= $row['tgl_cari']?>">
                                                                                 <button type="submit" name="delete-expense" class="btn btn-danger btn-sm shadow"><i class="fas fa-trash"></i> Hapus</button>
                                                                             </form>
                                                                         </div>
