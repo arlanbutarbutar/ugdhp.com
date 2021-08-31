@@ -7,7 +7,7 @@ $_SESSION['page-name']="Setting Nota";$_SESSION['page-to']="setting-nota";
     <head><?php require_once("../Application/access/header-back.php")?></head>
     <body id="page-top">
         <?php require_once("../Application/access/topNav.php");?>
-        <div class="container-fluid bg-soft">
+        <div class="container-fluid bg-<?= $bgMode?>">
             <div class="row">
                 <div class="col-12">
                     <?php require_once("../Application/access/sideNavbar.php")?>
@@ -15,19 +15,21 @@ $_SESSION['page-name']="Setting Nota";$_SESSION['page-to']="setting-nota";
                         <?php require_once("../Application/access/topNavbar.php");if($_SESSION['id-role']<=3){?>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="btn-toolbar dropdown">
-                                <button class="btn btn-primary btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-<?= $btnMode?> btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="fas fa-plus mr-2"></span>New Task
                                 </button>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2">
+                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2 bg-<?= $bgMode?>">
                                     <?php foreach($newTask as $row):?>
-                                    <a class="dropdown-item font-weight-bold text-dark" href="<?= $row['url']?>"><i class="<?= $row['icon']?> text-dark"></i></span> <?= $row['title']?></a>
+                                    <a class="dropdown-item font-weight-bold <?= $colorMode?>" href="<?= $row['url']?>"><i class="<?= $row['icon']?> <?= $colorMode?>"></i></span> <?= $row['title']?></a>
                                     <?php endforeach;?>
                                 </div>
                             </div>
+                            <?php if($_SESSION['id-role']<=2){?>
                             <div class="btn-group">
-                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-primary">Usage Procedure</button>
-                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-primary">Report</button>
+                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Usage Procedure</button>
+                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Report</button>
                             </div>
+                            <?php }?>
                         </div>
                         <?php }?>
 
@@ -35,11 +37,11 @@ $_SESSION['page-name']="Setting Nota";$_SESSION['page-to']="setting-nota";
                             <div class="row">
                                 <div class="col-md-12 mb-n3">
                                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                        <small class="mb-0"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
+                                        <small class="mb-0 <?= $colorMode?>"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
                                         <button type="button" class="btn btn-success btn-sm shadow" data-toggle="modal" data-target="#new"><i class="fas fa-plus"></i> New</button>
                                         <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
+                                                <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Insert Notes Type</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -50,18 +52,18 @@ $_SESSION['page-name']="Setting Nota";$_SESSION['page-to']="setting-nota";
                                                         <div class="modal-body">
                                                             <p>Masukan tipe nota jika ingin ditambahakan.</p>
                                                             <div class="form-group">
-                                                                <input type="text" name="name" class="form-control text-center" placeholder="Nama" required>
+                                                                <input type="text" name="name" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Nama" required>
                                                             </div>
                                                             <div class="form-group mt-3">
-                                                                <input type="number" name="no-nota" class="form-control text-center" placeholder="Nomor nota" required>
+                                                                <input type="number" name="no-nota" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Nomor nota" required>
                                                             </div>
                                                             <div class="form-group mt-3">
-                                                                <input type="text" name="kombinasi" class="form-control text-center" placeholder="Kombinasi">
-                                                                <small class="text-info small">Memasukan karakter kombinasi hanya jika diperlukan!</small>
+                                                                <input type="text" name="kombinasi" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Kombinasi">
+                                                                <small class="text-info small <?= $colorMode?>">Memasukan karakter kombinasi hanya jika diperlukan!</small>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                             <button type="submit" name="submit-notes-type" class="btn btn-success btn-sm shadow"><i class="fas fa-plus"></i> Buat</button>
                                                         </div>
                                                     </form>
@@ -78,9 +80,9 @@ $_SESSION['page-name']="Setting Nota";$_SESSION['page-to']="setting-nota";
                         <!-- == Setting Nota == -->
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="card shadow" style="overflow-x: auto">
+                                    <div class="card shadow border-light bg-<?= $bgMode?>" style="overflow-x: auto">
                                         <div class="card-body">
-                                            <table class="table table-sm text-center">
+                                            <table class="table table-sm text-center <?= $colorMode?>">
                                                 <thead>
                                                     <tr style="border-top: hidden">
                                                         <th scope="col">#</th>
@@ -108,7 +110,7 @@ $_SESSION['page-name']="Setting Nota";$_SESSION['page-to']="setting-nota";
                                                                 <button type="button" class="btn btn-warning btn-sm shadow" data-toggle="modal" data-target="#ubah<?= $row['id_nota']?>"><i class="fas fa-pen"></i> Ubah</button>
                                                                 <div class="modal fade" id="ubah<?= $row['id_nota']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
+                                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title" id="exampleModalLabel">Ubah <?= $row['name']?></h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -119,14 +121,14 @@ $_SESSION['page-name']="Setting Nota";$_SESSION['page-to']="setting-nota";
                                                                                 <input type="hidden" name="id-nota" value="<?= $row['id_nota']?>">
                                                                                 <div class="modal-body">
                                                                                     <div class="form-group">
-                                                                                        <input type="number" name="no-nota" class="form-control text-center" placeholder="Nomor nota" required>
+                                                                                        <input type="number" name="no-nota" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Nomor nota" required>
                                                                                     </div>
                                                                                     <div class="form-group mt-3">
-                                                                                        <input type="text" name="kombinasi" class="form-control text-center" placeholder="Kombinasi">
+                                                                                        <input type="text" name="kombinasi" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Kombinasi">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Close</button>
+                                                                                    <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm" data-dismiss="modal">Close</button>
                                                                                     <button type="submit" name="edit-notes-type" class="btn btn-warning btn-sm shadow"><i class="fas fa-pen"></i> Ubah</button>
                                                                                 </div>
                                                                             </form>
@@ -139,7 +141,7 @@ $_SESSION['page-name']="Setting Nota";$_SESSION['page-to']="setting-nota";
                                                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus<?= $row['id_nota']?>"><i class="fas fa-trash"></i> Hapus</button>
                                                                 <div class="modal fade" id="hapus<?= $row['id_nota']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
+                                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                             <div class="modal-header border-bottom-0">
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                             </div>
@@ -147,7 +149,7 @@ $_SESSION['page-name']="Setting Nota";$_SESSION['page-to']="setting-nota";
                                                                                 <p>Yakin ingin menghapus <?= $row['name']?>?</p>
                                                                             </div>
                                                                             <div class="modal-footer m-auto border-top-0">
-                                                                                <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Tidak</button>
+                                                                                <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm" data-dismiss="modal">Tidak</button>
                                                                                 <button type="submit" name="delete-notes-type" class="btn btn-danger btn-sm shadow"><i class="fas fa-trash"></i> Hapus</button>
                                                                             </div>
                                                                         </div>

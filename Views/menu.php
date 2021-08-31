@@ -7,7 +7,7 @@ $_SESSION['page-name']="Menu";$_SESSION['page-to']="menu";
     <head><?php require_once("../Application/access/header-back.php")?></head>
     <body id="page-top">
         <?php require_once("../Application/access/topNav.php");?>
-        <div class="container-fluid bg-soft">
+        <div class="container-fluid bg-<?= $rowMode['bg']?>">
             <div class="row">
                 <div class="col-12">
                     <?php require_once("../Application/access/sideNavbar.php")?>
@@ -15,19 +15,21 @@ $_SESSION['page-name']="Menu";$_SESSION['page-to']="menu";
                         <?php require_once("../Application/access/topNavbar.php");if($_SESSION['id-role']<=3){?>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="btn-toolbar dropdown">
-                                <button class="btn btn-primary btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-<?= $btnMode?> btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="fas fa-plus mr-2"></span>New Task
                                 </button>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2">
+                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2 bg-<?= $bgMode?>">
                                     <?php foreach($newTask as $row):?>
-                                    <a class="dropdown-item font-weight-bold text-dark" href="<?= $row['url']?>"><i class="<?= $row['icon']?> text-dark"></i></span> <?= $row['title']?></a>
+                                    <a class="dropdown-item font-weight-bold <?= $colorMode?>" href="<?= $row['url']?>"><i class="<?= $row['icon']?> <?= $colorMode?>"></i></span> <?= $row['title']?></a>
                                     <?php endforeach;?>
                                 </div>
                             </div>
+                            <?php if($_SESSION['id-role']<=2){?>
                             <div class="btn-group">
-                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-primary">Usage Procedure</button>
-                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-primary">Report</button>
+                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Usage Procedure</button>
+                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Report</button>
                             </div>
+                            <?php }?>
                         </div>
                         <?php }?>
 
@@ -35,11 +37,11 @@ $_SESSION['page-name']="Menu";$_SESSION['page-to']="menu";
                             <div class="row">
                                 <div class="col-md-12 mb-n3">
                                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                        <small class="mb-0"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
+                                        <small class="mb-0 <?= $colorMode?>"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new-menu"><i class="fas fa-plus"></i> New</button>
                                         <div class="modal fade" id="new-menu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
+                                                <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Insert Menu</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -48,11 +50,11 @@ $_SESSION['page-name']="Menu";$_SESSION['page-to']="menu";
                                                         <div class="modal-body">
                                                             <p class="small">Tambahkan menu yang kamu mau sesuai kebutuhan.</p>
                                                             <div class="form-group">
-                                                                <input type="text" name="menu" placeholder="Nama Menu" class="form-control text-center" required>
+                                                                <input type="text" name="menu" placeholder="Nama Menu" class="form-control text-center border-light bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                             <button type="submit" name="submit-menu" class="btn btn-sm btn-success shadow"><i class="fas fa-plus"></i> Tambah</button>
                                                         </div>
                                                     </form>
@@ -69,8 +71,8 @@ $_SESSION['page-name']="Menu";$_SESSION['page-to']="menu";
                         <!-- == Menu == -->
                             <div class="row">
                                 <div class="col-lg-12 mt-3">
-                                    <div class="card card-body shadow border-0" style="overflow-x: auto">
-                                        <table class="table table-sm text-center">
+                                    <div class="card card-body shadow border-light bg-<?= $rowMode['bg']?>" style="overflow-x: auto">
+                                        <table class="table table-sm text-center <?= $colorMode?>">
                                             <thead>
                                                 <tr style="border-top:hidden">
                                                     <th scope="col">#</th>
@@ -91,7 +93,7 @@ $_SESSION['page-name']="Menu";$_SESSION['page-to']="menu";
                                                             <button type="button" class="btn btn-warning btn-sm shadow" data-toggle="modal" data-target="#ubah<?= $row['id_menu']?>"><i class="fas fa-pen"></i> Ubah</button>
                                                             <div class="modal fade" id="ubah<?= $row['id_menu']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Ubah Menu</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -102,11 +104,11 @@ $_SESSION['page-name']="Menu";$_SESSION['page-to']="menu";
                                                                             <div class="modal-body">
                                                                                 <input type="hidden" name="id-menu" value="<?= $row['id_menu']?>">
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="menu" value="<?= $row['menu']?>" placeholder="Ubah nama menu" class="form-control text-center" required>
+                                                                                    <input type="text" name="menu" value="<?= $row['menu']?>" placeholder="Ubah nama menu" class="form-control text-center border-light bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Close</button>
+                                                                                <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm" data-dismiss="modal">Close</button>
                                                                                 <button type="submit" name="ubah-menu" class="btn btn-warning btn-sm shadow"><i class="fas fa-pen"></i> Ubah</button>
                                                                             </div>
                                                                         </form>
@@ -119,7 +121,7 @@ $_SESSION['page-name']="Menu";$_SESSION['page-to']="menu";
                                                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus<?= $row['id_menu']?>"><i class="fas fa-trash"></i> Hapus</button>
                                                             <div class="modal fade" id="hapus<?= $row['id_menu']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header border-bottom-0">
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                         </div>
@@ -127,7 +129,7 @@ $_SESSION['page-name']="Menu";$_SESSION['page-to']="menu";
                                                                             <p>Yakin ingin menghapus menu <?= $row['menu']?>?</p>
                                                                         </div>
                                                                         <div class="modal-footer m-auto border-top-0">
-                                                                            <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Tidak</button>
+                                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm" data-dismiss="modal">Tidak</button>
                                                                             <button type="submit" name="hapus-menu" class="btn btn-danger btn-sm shadow"><i class="fas fa-trash"></i> Hapus</button>
                                                                         </div>
                                                                     </div>

@@ -433,25 +433,6 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                         header("Location: nota-tinggal");return false;}}
             }else if(empty($data['nota-dp'])){
                 $nota_dp=0;}
-            if(!empty($nota_dp)){
-                if(empty($dp) || $dp==0){
-                    $log="Kesalahan Input Nota DP! Nomor nota dp ".$nota_dp." sudah ada tetapi biaya dp belum dimasukan.";
-                    mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
-                    $_SESSION['time-message']=time();
-                    $_SESSION['message-danger']="Kamu belum memasukan uang muka atau DP sementara nomor DP ada, sialakan cek lagi!";
-                    header("Location: nota-tinggal");return false;}
-            }else if(empty($nota_dp) && $dp>=10000){
-                $log="Kesalahan Input Nota DP! Belum memasukan nomor nota dp sementara dp ada.";
-                mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
-                $_SESSION['time-message']=time();
-                $_SESSION['message-danger']="Kamu belum memasukan nomor nota dp sementara dp sudah, silakan coba lagi!";
-                header("Location: nota-tinggal");return false;}
-            if($biaya<=10000){
-                $log="Kesalahan Input Biaya Perbaikan! Memasukan biaya kurang dari Rp. 10.000,00.";
-                mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
-                $_SESSION['time-message']=time();
-                $_SESSION['message-danger']="Pastikan anda memasukan biaya dengan benar (Min: Rp. 10.000,00)!";
-                header("Location: nota-tinggal");return false;}
             $barcode=barcode_notes($data_encrypt);
             if(empty($email)){$email=$nota_tinggal;$password=$nota_tinggal;}
             else if(!empty($email)){
@@ -462,12 +443,41 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     $_SESSION['time-message']=time();
                     $_SESSION['message-danger']="Email yang dimasukan sudah ada!";
                     header("Location: nota-tinggal");return false;}}
+            if(!empty($data['nota-garansi'])){
+                $id_userGaransi=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-user-garansi']))));
+                $nota_garansi=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['nota-garansi']))));
+                $garansi=date('M d, Y h:i:s');
+                $dp=0;
+                $biaya=0;
+                mysqli_query($conn_back, "UPDATE notes SET garansi='$garansi' WHERE id_user='$id_userGaransi'");
+            }else if(empty($data['nota-garansi'])){
+                $nota_garansi='DP0';
+                if(!empty($nota_dp)){
+                    if(empty($dp) || $dp==0){
+                        $log="Kesalahan Input Nota DP! Nomor nota dp ".$nota_dp." sudah ada tetapi biaya dp belum dimasukan.";
+                        mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                        $_SESSION['time-message']=time();
+                        $_SESSION['message-danger']="Kamu belum memasukan uang muka atau DP sementara nomor DP ada, sialakan cek lagi!";
+                        header("Location: nota-tinggal");return false;}
+                }else if(empty($nota_dp) && $dp>=10000){
+                    $log="Kesalahan Input Nota DP! Belum memasukan nomor nota dp sementara dp ada.";
+                    mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                    $_SESSION['time-message']=time();
+                    $_SESSION['message-danger']="Kamu belum memasukan nomor nota dp sementara dp sudah, silakan coba lagi!";
+                    header("Location: nota-tinggal");return false;}
+                if($biaya<=10000){
+                    $log="Kesalahan Input Biaya Perbaikan! Memasukan biaya kurang dari Rp. 10.000,00.";
+                    mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                    $_SESSION['time-message']=time();
+                    $_SESSION['message-danger']="Pastikan anda memasukan biaya dengan benar (Min: Rp. 10.000,00)!";
+                    header("Location: nota-tinggal");return false;}
+            }
             mysqli_query($conn_back, "INSERT INTO users(id_user,data_encrypt,first_name,email,password,phone,address,id_log,date_created) VALUES('$id_user','$data_encrypt','$username','$email','$password','$tlpn','$alamat','1','$date')");
             if($id_layanan==1){
                 mysqli_query($conn_back, "INSERT INTO handphone(id_hp,type,seri,imei) VALUES('$id_user','$type','$seri_hp','$imei')");
             }else if($id_layanan==2){
                 mysqli_query($conn_back, "INSERT INTO laptop(id_laptop,merek,seri) VALUES('$id_user','$merek','$seri_laptop')");}
-            mysqli_query($conn_back, "INSERT INTO notes(id_nota_tinggal,id_nota_dp,id_user,id_layanan,id_barang,id_pegawai,tgl_cari,tgl_masuk,tgl_status,tgl_ambil,time,kerusakan,kondisi,kelengkapan,dp,biaya,barcode) VALUES('$nota_tinggal','$nota_dp','$id_user','$id_layanan','$id_barang','$id_teknisi','$date_search','$date','$date','$tgl_ambil','$time','$kerusakan','$kondisi','$kelengkapan','$dp','$biaya','$barcode')");
+            mysqli_query($conn_back, "INSERT INTO notes(id_nota_tinggal,id_nota_dp,id_user,id_layanan,id_barang,id_pegawai,tgl_cari,tgl_masuk,tgl_status,tgl_ambil,time,kerusakan,kondisi,kelengkapan,nota_garansi,dp,biaya,barcode) VALUES('$nota_tinggal','$nota_dp','$id_user','$id_layanan','$id_barang','$id_teknisi','$date_search','$date','$date','$tgl_ambil','$time','$kerusakan','$kondisi','$kelengkapan','$nota_garansi','$dp','$biaya','$barcode')");
             return mysqli_affected_rows($conn_back);}
         function barcode_notes($data_encrypt){global $link_qr;
             require_once('../Assets/phpqrcode/qrlib.php');
@@ -1125,11 +1135,19 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
             foreach($files as $file){if(is_file($file))unlink($file);}
             mysqli_query($conn_back, "DELETE FROM laporan_spareparts WHERE id_sparepart='$id_sparepart'");
             return mysqli_affected_rows($conn_back);}
-        function sparepartTerpakai($data){global $conn_back,$link_qrs,$date_search,$time;
+        function sparepartTerpakai($data){global $conn_back,$link_qrs,$date_search,$time,$id_log, $date;
             $id_sparepart=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-sparepart']))));
             $jmlh_barang=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['jmlh-barang']))));
             $id_user=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-user']))));
             $id_pegawai=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-pegawai']))));
+            $dp=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['dp']))));
+            if($_SESSION['id-role']==3){
+                if($dp==0){
+                    $log="Kesalahan Laporan Sparepart! Memasukan nota yang tidak ada DP.";
+                    mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                    $_SESSION['time-message']=time();
+                    $_SESSION['message-special']="Ops...! Nota yang dipilih tidak ada DP";
+                    header("Location: select-note?ids=$id_sparepart&jb=$jmlh_barang"); return false;}}
             $checkNotes=mysqli_query($conn_back, "SELECT * FROM notes WHERE id_user='$id_user'");
             $row=mysqli_fetch_assoc($checkNotes);
             if(!empty($row['id_nota_tinggal'])){
@@ -1187,6 +1205,14 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
     if($_SESSION['id-role']<=4){}
     if($_SESSION['id-role']<=5){}
     if($_SESSION['id-role']<=6){
+        function darkMode($data){global $conn_back, $id_user;
+            $id=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-darkMode']))));
+            if($id==1){
+                mysqli_query($conn_back, "UPDATE users SET id_darkMode='2' WHERE id_user='$id_user'");
+                return mysqli_affected_rows($conn_back);
+            }else if($id==2){
+                mysqli_query($conn_back, "UPDATE users SET id_darkMode='1' WHERE id_user='$id_user'");
+                return mysqli_affected_rows($conn_back);}}
         function photo_profile($data){global $conn_back,$id_user;
             $img=file_photo_user();
             if(!$img){return false;}

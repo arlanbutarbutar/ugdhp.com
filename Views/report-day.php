@@ -7,7 +7,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
     <head><?php require_once("../Application/access/header-back.php")?></head>
     <body id="page-top">
         <?php require_once("../Application/access/topNav.php");?>
-        <div class="container-fluid bg-soft">
+        <div class="container-fluid bg-<?= $bgMode?>">
             <div class="row">
                 <div class="col-12">
                     <?php require_once("../Application/access/sideNavbar.php")?>
@@ -15,19 +15,21 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                         <?php require_once("../Application/access/topNavbar.php");if($_SESSION['id-role']<=3){?>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="btn-toolbar dropdown">
-                                <button class="btn btn-primary btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-<?= $btnMode?> btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="fas fa-plus mr-2"></span>New Task
                                 </button>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2">
+                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2 bg-<?= $bgMode?>">
                                     <?php foreach($newTask as $row):?>
-                                    <a class="dropdown-item font-weight-bold text-dark" href="<?= $row['url']?>"><i class="<?= $row['icon']?> text-dark"></i></span> <?= $row['title']?></a>
+                                    <a class="dropdown-item font-weight-bold <?= $colorMode?>" href="<?= $row['url']?>"><i class="<?= $row['icon']?> <?= $colorMode?>"></i></span> <?= $row['title']?></a>
                                     <?php endforeach;?>
                                 </div>
                             </div>
+                            <?php if($_SESSION['id-role']<=2){?>
                             <div class="btn-group">
-                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-primary">Usage Procedure</button>
-                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-primary">Report</button>
+                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Usage Procedure</button>
+                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Report</button>
                             </div>
+                            <?php }?>
                         </div>
                         <?php }?>
 
@@ -35,14 +37,14 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                             <div class="row">
                                 <div class="col-md-12 mb-n3">
                                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                        <small class="mb-0"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
+                                        <small class="mb-0 <?= $colorMode?>"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
                                         <div>
 
                                             <!-- == Search == -->
                                                 <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#search"><i class="fas fa-search"></i> Search</button>
                                                 <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Find what you're looking for</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -51,7 +53,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 <p class="text-center">Silakan masukan kata yang ingin dicari di salah satu form pencarian</p>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="number" name="note" class="form-control" placeholder="Cari Nota">
+                                                                        <input type="number" name="note" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari Nota">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-nota-report"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -60,7 +62,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 <?php if($_SESSION['id-role']==3){if($_SESSION['id-category']==1){?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" name="hp" class="form-control" placeholder="Cari handphone">
+                                                                        <input type="text" name="hp" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari handphone">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-hp-report"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -69,7 +71,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 <?php }if($_SESSION['id-category']==2){?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" name="laptop" class="form-control" placeholder="Cari laptop">
+                                                                        <input type="text" name="laptop" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari laptop">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-laptop-report"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -78,7 +80,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 <?php }}else if($_SESSION['id-role']!=3){?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" name="hp" class="form-control" placeholder="Cari handphone">
+                                                                        <input type="text" name="hp" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari handphone">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-hp-report"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -86,7 +88,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 </form>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" name="laptop" class="form-control" placeholder="Cari laptop">
+                                                                        <input type="text" name="laptop" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari laptop">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-laptop-report"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -95,7 +97,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 <?php }?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="date" name="tgl" class="form-control" placeholder="Tanggal">
+                                                                        <input type="date" name="tgl" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Tanggal">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-date-report"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -103,7 +105,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 </form>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="month" name="bulan" class="form-control" placeholder="Bulan">
+                                                                        <input type="month" name="bulan" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Bulan">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-month-report"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -111,7 +113,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 </form>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <select name="id-teknisi" class="form-control">
+                                                                        <select name="id-teknisi" class="form-control bg-<?= $bgMode?> <?= $colorMode?>">
                                                                             <option>Pilih Teknisi</option>
                                                                             <?php foreach($selectTech as $rowTech):?>
                                                                             <option value="<?= $rowTech['id_user']?>"><?= $rowTech['first_name']?></option>
@@ -139,9 +141,9 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                         <!-- == Report Days == -->
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="card shadow" style="overflow-x: auto">
+                                    <div class="card shadow border-light bg-<?= $bgMode?>" style="overflow-x: auto">
                                         <div class="card-body">
-                                            <table class="table table-sm text-center">
+                                            <table class="table table-sm text-center <?= $colorMode?>">
                                                 <thead>
                                                     <tr style="border-top:hidden">
                                                         <th scope="col">#</th>
@@ -182,7 +184,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                             <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#barcode<?= $row['id_data']?>"><i class="fas fa-qrcode"></i></button>
                                                             <div class="modal fade" id="barcode<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Barcode T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -192,7 +194,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                             <img src="../Assets/img/img-qrcode-notes/<?= $row['barcode']?>" alt="barcode" style="width: 40%">
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
+                                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Keluar</button>
                                                                             <form action="" method="POST">
                                                                                 <input type="hidden" name="id-user" value="<?= $row['id_user']?>">
                                                                                 <input type="hidden" name="barcode-old" value="<?= $row['barcode']?>">
@@ -208,7 +210,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                             <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#users<?= $row['id_data']?>"><i class="fas fa-eye"></i> <?= $row['first_name']?></button>
                                                             <div class="modal fade" id="users<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Users T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -229,7 +231,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#handphone<?= $row['id_data']?>"><i class="fas fa-eye"></i> <?= $row['product']?></button>
                                                                 <div class="modal fade" id="handphone<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
+                                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title" id="exampleModalLabel">Handphone T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -249,7 +251,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#laptop<?= $row['id_data']?>"><i class="fas fa-eye"></i> <?= $row['product']?></button>
                                                                 <div class="modal fade" id="laptop<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
+                                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title" id="exampleModalLabel">Laptop T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -281,7 +283,7 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                             <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#bukti<?= $row['id_data']?>"><i class="fas fa-eye"></i> Lihat</button>
                                                             <div class="modal fade" id="bukti<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Bukti tanpa nota T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -293,7 +295,16 @@ $_SESSION['page-name']="Laporan Harian";$_SESSION['page-to']="report-day";
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                    <?php $total_dp += $row['dp']; $total_biaya += $row['biaya']; $no++; }}?>
+                                                    </tr>
+                                                    <?php $total_dp += $row['dp']; $total_biaya += $row['biaya']; $no++; }}if($_SESSION['id-role']<=2){?>
+                                                    <tr>
+                                                        <th>Total</th>
+                                                        <th colspan="15"></th>
+                                                        <th>Rp. <?= number_format($total_dp)?></th>
+                                                        <th>Rp. <?= number_format($total_biaya)?></th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <?php }?>
                                                 </tbody>
                                             </table>
                                             <nav class="small mt-3" aria-label="Page navigation example">

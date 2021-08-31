@@ -7,7 +7,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
     <head><?php require_once("../Application/access/header-back.php")?></head>
     <body id="page-top">
         <?php require_once("../Application/access/topNav.php");?>
-        <div class="container-fluid bg-soft">
+        <div class="container-fluid bg-<?= $bgMode?>">
             <div class="row">
                 <div class="col-12">
                     <?php require_once("../Application/access/sideNavbar.php")?>
@@ -15,19 +15,21 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                         <?php require_once("../Application/access/topNavbar.php");if($_SESSION['id-role']<=3){?>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="btn-toolbar dropdown">
-                                <button class="btn btn-primary btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-<?= $btnMode?> btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="fas fa-plus mr-2"></span>New Task
                                 </button>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2">
+                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2 bg-<?= $bgMode?>">
                                     <?php foreach($newTask as $row):?>
-                                    <a class="dropdown-item font-weight-bold text-dark" href="<?= $row['url']?>"><i class="<?= $row['icon']?> text-dark"></i></span> <?= $row['title']?></a>
+                                    <a class="dropdown-item font-weight-bold <?= $colorMode?>" href="<?= $row['url']?>"><i class="<?= $row['icon']?> <?= $colorMode?>"></i></span> <?= $row['title']?></a>
                                     <?php endforeach;?>
                                 </div>
                             </div>
+                            <?php if($_SESSION['id-role']<=2){?>
                             <div class="btn-group">
-                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-primary">Usage Procedure</button>
-                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-primary">Report</button>
+                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Usage Procedure</button>
+                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Report</button>
                             </div>
+                            <?php }?>
                         </div>
                         <?php }?>
 
@@ -35,7 +37,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                             <div class="row">
                                 <div class="col-md-12 mb-n3">
                                     <div class="d-sm-flex align-items-center justify-content-between flex-wrap flex-md-nowrap mb-4">
-                                        <small class="mb-0"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
+                                        <small class="mb-0 <?= $colorMode?>"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
                                         <div class="d-flex flex-nowrap">
 
                                             <!-- == Aksi Cepat == -->
@@ -55,7 +57,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                 <button type="button" class="btn btn-info btn-sm shadow ml-2" data-toggle="modal" data-target="#search"><i class="fas fa-search"></i> Search</button>
                                                 <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Find what you're looking for</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -63,7 +65,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                             <div class="modal-body">
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <select name="id-status" class="form-control">
+                                                                        <select name="id-status" class="form-control bg-<?= $bgMode?> <?= $colorMode?>">
                                                                             <option>Pilih Status</option>
                                                                             <?php foreach($statusSparepart as $rowSt):?>
                                                                             <option value="<?= $rowSt['id_status']?>"><?= $rowSt['status']?></option>
@@ -76,7 +78,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                 </form>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" name="sparepart" class="form-control" placeholder="Cari...">
+                                                                        <input type="text" name="sparepart" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari...">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-sparepart"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -85,7 +87,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                 <form action="" method="POST">
                                                                     <label for="tgl-pembelian">Tanggal Pembelian</label>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="date" name="date" id="tgl-pembelian" class="form-control" placeholder="Date">
+                                                                        <input type="date" name="date" id="tgl-pembelian" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Date">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-date-sparepart"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -96,10 +98,10 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                     <div class="input-group mb-3">
                                                                         <div class="row">
                                                                             <div class="col-lg-5">
-                                                                                <input type="date" name="date1" id="rentang-tanggal1" class="form-control" placeholder="Date Start">
+                                                                                <input type="date" name="date1" id="rentang-tanggal1" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Date Start">
                                                                             </div>
                                                                             <div class="col-lg-5">
-                                                                                <input type="date" name="date2" id="rentang-tanggal2" class="form-control" placeholder="Date End">
+                                                                                <input type="date" name="date2" id="rentang-tanggal2" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Date End">
                                                                             </div>
                                                                             <div class="col-lg-2">
                                                                                 <button class="btn btn-outline-info" type="submit" name="search-dateLn-sparepart"><i class="fas fa-search"></i></button>
@@ -112,7 +114,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                     <div class="input-group mb-3">
                                                                         <div class="row">
                                                                             <div class="col-lg-5">
-                                                                                <select name="id-pegawai" class="form-control">
+                                                                                <select name="id-pegawai" class="form-control bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     <option>Pilih Teknisi</option>
                                                                                     <?php foreach($selectTech as $rowTech):?>
                                                                                     <option value="<?= $rowTech['id_user']?>"><?= $rowTech['first_name']?></option>
@@ -120,7 +122,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                                 </select>
                                                                             </div>
                                                                             <div class="col-lg-5">
-                                                                                <input type="month" name="month" class="form-control" placeholder="Date End">
+                                                                                <input type="month" name="month" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Date End">
                                                                             </div>
                                                                             <div class="col-lg-2">
                                                                                 <button class="btn btn-outline-info" type="submit" name="search-temonth-sparepart"><i class="fas fa-search"></i></button>
@@ -138,7 +140,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                 <button type="button" class="btn btn-success btn-sm shadow ml-2" data-toggle="modal" data-target="#new"><i class="fas fa-plus"></i> New</button>
                                                 <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Masukan Data</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -151,7 +153,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                     <div class="row">
                                                                         <div class="col-lg-10">
                                                                             <div class="form-group">
-                                                                                <select name="suplayer" class="form-control" required>
+                                                                                <select name="suplayer" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                     <option>Pilih Penyuplai</option>
                                                                                     <?php foreach($supplier as $row_sp):?>
                                                                                     <option value="<?= $row_sp['supplier']?>"><?= $row_sp['supplier']?></option>
@@ -161,22 +163,22 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                         </div>
                                                                         <div class="col-lg-2">
                                                                             <div class="form-group">
-                                                                                <button type="button" class="btn btn-primary shadow ml-n3" data-toggle="modal" data-target="#tambah-suplayer"><i class="fas fa-plus"></i></button>
+                                                                                <button type="button" class="btn btn-outline-<?= $btnMode?> shadow ml-n3" data-toggle="modal" data-target="#tambah-suplayer"><i class="fas fa-plus"></i></button>
                                                                                 <button type="button" class="btn btn-link btn-sm ml-n1" data-toggle="tooltip" data-placement="top" title="Jika sparepart yg ingin kamu masukan tidak ada dalam daftar, kamu bisa menambahkannya! data akan masuk namun tetap akan dicek admin 2/48."><i class="fas fa-question-circle text-info"></i></button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <input type="text" name="ket" placeholder="Sparepart" class="form-control">
+                                                                        <input type="text" name="ket" placeholder="Sparepart" class="form-control bg-<?= $bgMode?> <?= $colorMode?>">
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <input type="number" name="jumlah" placeholder="Jumlah barang" class="form-control mt-3">
+                                                                        <input type="number" name="jumlah" placeholder="Jumlah barang" class="form-control bg-<?= $bgMode?> <?= $colorMode?> mt-3">
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <input type="number" name="harga" placeholder="Harga (per biji)" class="form-control">
+                                                                        <input type="number" name="harga" placeholder="Harga (per biji)" class="form-control bg-<?= $bgMode?> <?= $colorMode?>">
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <textarea name="ket-plus" cols="30" rows="5" class="form-control" placeholder="Keterangan tambahan" style="resize: none"></textarea>
+                                                                        <textarea name="ket-plus" cols="30" rows="5" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Keterangan tambahan" style="resize: none"></textarea>
                                                                     </div>
                                                                     <div class="row mt-3">
                                                                         <div class="col-lg-4 m-auto">
@@ -186,13 +188,13 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                         </div>
                                                                         <div class="col-lg-8">
                                                                             <div class="form-group">
-                                                                                <input type="date" name="tgl-beli" class="form-control" required>
+                                                                                <input type="date" name="tgl-beli" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                    <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                                     <button type="submit" name="submit-sparepart" class="btn btn-success btn-sm shadow"><i class="fas fa-plus"></i> Tambah</button>
                                                                 </div>
                                                             </form>
@@ -204,7 +206,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                             <!-- == New Sparepart == -->
                                                 <div class="modal fade" id="tambah-suplayer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                             <div class="modal-header border-bottom-0">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Suplayer Baru</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -213,10 +215,10 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                             </div>
                                                             <form action="" method="POST">
                                                                 <div class="modal-body">
-                                                                    <input type="text" name="suplayer" class="form-control text-center" placeholder="Suplayer Baru" required>
+                                                                    <input type="text" name="suplayer" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Suplayer Baru" required>
                                                                 </div>
                                                                 <div class="modal-footer border-top-0 justify-content-center">
-                                                                    <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                    <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                                     <button type="submit" name="tambah-suplayer" class="btn btn-success btn-sm shadow"><i class="fas fa-plus"></i> Tambah</button>
                                                                 </div>
                                                             </form>
@@ -236,9 +238,9 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                         <!-- == Nota Tinggal == -->
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="card shadow" style="overflow-x: auto">
+                                    <div class="card shadow border-light bg-<?= $bgMode?>" style="overflow-x: auto">
                                         <div class="card-body">
-                                            <table class="table table-sm text-center">
+                                            <table class="table table-sm text-center <?= $colorMode?>">
                                                 <thead>
                                                     <tr style="border-top:hidden">
                                                         <th scope="col">#</th>
@@ -272,7 +274,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                             <button type="button" class="btn btn-warning btn-sm shadow" data-toggle="modal" data-target="#ubah<?= $row['id_sparepart']?>"><i class="fas fa-pen"></i> Ubah</button>
                                                             <div class="modal fade" id="ubah<?= $row['id_sparepart']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Ubah Data <?= $row['ket']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -282,10 +284,10 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                             <input type="hidden" name="tgl-cari" value="<?= $row['tgl_cari']?>">
                                                                             <div class="modal-body text-center">
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="ket" value="<?= $row['ket']?>" placeholder="Sparepart" class="form-control">
+                                                                                    <input type="text" name="ket" value="<?= $row['ket']?>" placeholder="Sparepart" class="form-control bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                 </div>
                                                                                 <div class="form-group mt-3">
-                                                                                    <select name="suplayer" class="form-control" required>
+                                                                                    <select name="suplayer" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                         <option>Pilih Penyuplai</option>
                                                                                         <?php foreach($supplier as $row_sp):?>
                                                                                         <option value="<?= $row_sp['supplier']?>"><?= $row_sp['supplier']?></option>
@@ -293,13 +295,13 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="form-group mt-3">
-                                                                                    <input type="number" name="jumlah" value="<?= $row['jmlh_barang']?>" placeholder="Jumlah barang" class="form-control mt-3">
+                                                                                    <input type="number" name="jumlah" value="<?= $row['jmlh_barang']?>" placeholder="Jumlah barang" class="form-control bg-<?= $bgMode?> <?= $colorMode?> mt-3">
                                                                                 </div>
                                                                                 <div class="form-group mt-3">
-                                                                                    <input type="number" name="harga" value="<?= $row['harga']?>" placeholder="Harga (per biji)" class="form-control">
+                                                                                    <input type="number" name="harga" value="<?= $row['harga']?>" placeholder="Harga (per biji)" class="form-control bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                 </div>
                                                                                 <div class="form-group mt-3">
-                                                                                    <textarea name="ket-plus" cols="30" rows="5" class="form-control" placeholder="Keterangan tambahan" style="resize: none"><?= $row['ket_plus']?></textarea>
+                                                                                    <textarea name="ket-plus" cols="30" rows="5" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Keterangan tambahan" style="resize: none"><?= $row['ket_plus']?></textarea>
                                                                                 </div>
                                                                                 <div class="row mt-3">
                                                                                     <div class="col-lg-4 m-auto">
@@ -309,13 +311,13 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                                     </div>
                                                                                     <div class="col-lg-8">
                                                                                         <div class="form-group">
-                                                                                            <input type="date" name="tgl-beli" value="<?= $row['tgl_beli']?>" class="form-control" required>
+                                                                                            <input type="date" name="tgl-beli" value="<?= $row['tgl_beli']?>" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                                <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                                                 <button type="submit" name="edit-sparepart" class="btn btn-warning btn-sm shadow"><i class="fas fa-pen"></i> Ubah</button>
                                                                             </div>
                                                                         </form>
@@ -327,7 +329,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                             <button type="button" class="btn btn-danger btn-sm shadow" data-toggle="modal" data-target="#hapus<?= $row['id_sparepart']?>"><i class="fas fa-trash"></i> Hapus</button>
                                                             <div class="modal fade" id="hapus<?= $row['id_sparepart']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header border-bottom-0">
                                                                             <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -336,7 +338,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                             <p class="text-center">Yakin ingin menghapus data <?= $row['ket']?>?</p>
                                                                         </div>
                                                                         <div class="modal-footer border-top-0 m-auto">
-                                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                                             <form action="" method="POST">
                                                                                 <input type="hidden" name="id-sparepart" value="<?= $row['id_sparepart']?>">
                                                                                 <input type="hidden" name="qrcode" value="<?= $row['qrcode']?>">
@@ -354,7 +356,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                             <button type="button" class="btn btn-success btn-sm shadow" data-toggle="modal" data-target="#lapor<?= $row['id_sparepart']?>"><i class="fas fa-book-medical"></i> Lapor</button>
                                                             <div class="modal fade" id="lapor<?= $row['id_sparepart']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header border-bottom-0">
                                                                             <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -363,7 +365,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                             <p class="text-center">Silakan pilih tombol dibawah ini.<br>Jika sparepart yang dipakai batal maka tekan batal <br> dan jika dipakai tekan lapor.</p>
                                                                         </div>
                                                                         <div class="modal-footer border-top-0 m-auto">
-                                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
+                                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Keluar</button>
                                                                             <form action="" method="POST">
                                                                                 <input type="hidden" name="id-sparepart" value="<?= $row['id_sparepart']?>">
                                                                                 <input type="hidden" name="qrcode" value="<?= $row['qrcode']?>">
@@ -380,7 +382,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                             <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#barcode<?= $row['id_sparepart']?>"><i class="fas fa-qrcode"></i></button>
                                                             <div class="modal fade" id="barcode<?= $row['id_sparepart']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Barcode <?= $row['ket']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -389,7 +391,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                             <img src="../Assets/img/img-qrcode-spareparts/<?= $row['qrcode']?>" alt="Barcode <?= $row['ket']?>" style="width: 200px" id="print">
                                                                         </div>
                                                                         <div class="modal-footer border-top-0 m-auto">
-                                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
+                                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Keluar</button>
                                                                             <form action="" method="POST">
                                                                                 <input type="hidden" name="id-sparepart" value="<?= $row['id_sparepart']?>">
                                                                                 <input type="hidden" name="qrcode-old" value="<?= $row['qrcode']?>">
@@ -406,7 +408,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                             <?php if(!empty($row['id_nota'])){?>
                                                             <div class="modal fade" id="dataNota<?= $row['id_sparepart']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header border-bottom-0">
                                                                             <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -448,7 +450,14 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                         <td>Rp. <?= number_format($row['harga'])?></td>
                                                         <td>Rp. <?= number_format($row['jmlh_barang']*$row['harga'])?></td>
                                                         <td><?= $row['ket_plus']?></td>
-                                                    <?php $no++; }}?>
+                                                    </tr>
+                                                    <?php $totalBiaya += $row['jmlh_barang']*$row['harga']; $no++; }}?>
+                                                    <tr>
+                                                        <th>Total</th>
+                                                        <th colspan="13"></th>
+                                                        <th>Rp. <?= number_format($totalBiaya)?></th>
+                                                        <th></th>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                             <nav class="small mt-3" aria-label="Page navigation example">

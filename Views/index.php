@@ -7,7 +7,7 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
     <head><?php require_once("../Application/access/header-back.php")?></head>
     <body id="page-top">
         <?php require_once("../Application/access/topNav.php");?>
-        <div class="container-fluid bg-soft">
+        <div class="container-fluid bg-<?= $rowMode['bg']?>">
             <div class="row">
                 <div class="col-12">
                     <?php require_once("../Application/access/sideNavbar.php")?>
@@ -15,19 +15,19 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
                         <?php require_once("../Application/access/topNavbar.php");if($_SESSION['id-role']<=3){?>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="btn-toolbar dropdown">
-                                <button class="btn btn-primary btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-<?= $btnMode?> btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="fas fa-plus mr-2"></span>New Task
                                 </button>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2">
+                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2 bg-<?= $bgMode?>">
                                     <?php foreach($newTask as $row):?>
-                                    <a class="dropdown-item font-weight-bold text-dark" href="<?= $row['url']?>"><i class="<?= $row['icon']?> text-dark"></i></span> <?= $row['title']?></a>
+                                    <a class="dropdown-item font-weight-bold <?= $colorMode?>" href="<?= $row['url']?>"><i class="<?= $row['icon']?> <?= $colorMode?>"></i></span> <?= $row['title']?></a>
                                     <?php endforeach;?>
                                 </div>
                             </div>
                             <?php if($_SESSION['id-role']<=2){?>
                             <div class="btn-group">
-                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-primary">Usage Procedure</button>
-                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-primary">Report</button>
+                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Usage Procedure</button>
+                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Report</button>
                             </div>
                             <?php }?>
                         </div>
@@ -61,7 +61,7 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
                             <!-- == Card Info == -->
                                 <!-- ++ Customers/Repair -->
                                 <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                                    <div class="card border-light shadow-sm">
+                                    <div class="card border-light shadow-sm bg-<?= $bgMode?> <?= $colorMode?>">
                                         <div class="card-body">
                                             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                                                 <div class="carousel-inner">
@@ -112,7 +112,7 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
                                 </div>
                                 <!-- ++ Income/Expense -->
                                 <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                                    <div class="card border-light shadow-sm">
+                                    <div class="card border-light shadow-sm bg-<?= $bgMode?> <?= $colorMode?>">
                                         <div class="card-body">
                                             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                                                 <div class="carousel-inner">
@@ -163,7 +163,7 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
                                 </div>
                                 <!-- ++ Total Repair/Notes -->
                                 <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                                    <div class="card border-light shadow-sm">
+                                    <div class="card border-light shadow-sm bg-<?= $bgMode?> <?= $colorMode?>">
                                         <div class="card-body">
                                             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                                                 <div class="carousel-inner">
@@ -176,8 +176,8 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
                                                             </div>
                                                             <div class="col-12 col-xl-7 px-xl-0">
                                                                 <h2 class="h5">Total Repair</h2>
-                                                                <h6 class="font-weight-normal text-gray"><span class="icon w-20 icon-xs icon-secondary mr-1"><span class="fas fa-mobile-alt"></span></span> Handphone <a href="#" class="h6"><?= $countTotalRepairHP?></a></h6>
-                                                                <h6 class="font-weight-normal text-gray mb-4"><span class="icon w-20 icon-xs icon-primary mr-1"><span class="fas fa-desktop"></span></span> Laptop <a href="#" class="h6"><?= $countTotalRepairLaptop?></a></h6>
+                                                                <h6 class="font-weight-normal"><span class="icon w-20 icon-xs icon-secondary mr-1"><span class="fas fa-mobile-alt"></span></span> Handphone <a href="#" class="h6"><?= $countTotalRepairHP?></a></h6>
+                                                                <h6 class="font-weight-normal mb-4"><span class="icon w-20 icon-xs icon-primary mr-1"><span class="fas fa-desktop"></span></span> Laptop <a href="#" class="h6"><?= $countTotalRepairLaptop?></a></h6>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -190,8 +190,8 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
                                                             </div>
                                                             <div class="col-12 col-xl-7 px-xl-0 mt-n1">
                                                                 <h2 class="h5">Total Notes</h2>
-                                                                <h6 class="font-weight-normal text-gray"><span class="icon w-20 icon-xs icon-secondary mr-1"><span class="fas fa-tools"></span></span> Nota Semua <a href="#" class="h6"><?= $countNotesT?></a></h6>
-                                                                <h6 class="font-weight-normal text-gray"><span class="icon w-20 icon-xs icon-primary mr-1"><span class="fas fa-recycle"></span></span> Nota Batal <a href="#" class="h6"><?= $countNotesB?></a></h6>
+                                                                <h6 class="font-weight-normal"><span class="icon w-20 icon-xs icon-secondary mr-1"><span class="fas fa-tools"></span></span> Nota Semua <a href="#" class="h6"><?= $countNotesT?></a></h6>
+                                                                <h6 class="font-weight-normal"><span class="icon w-20 icon-xs icon-primary mr-1"><span class="fas fa-recycle"></span></span> Nota Batal <a href="#" class="h6"><?= $countNotesB?></a></h6>
                                                                 <small class="text-<?= $colorNotes?>"><i class="fas fa-angle-<?= $iconNotes?>"></i> <?= $totalNotesPer?>% <?= $textNotes?></small>
                                                             </div>
                                                         </div>
@@ -211,9 +211,9 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
 
                                 <!-- == Total Spareparts == -->
                                     <div class="col-12 mb-4">
-                                        <div class="card border-light shadow-sm">
+                                        <div class="card border-light shadow-sm bg-<?= $bgMode?> <?= $colorMode?>">
                                             <div class="card-body border-bottom">
-                                                <div class="h6 font-weight-normal text-gray mb-2">Total Spareparts</div>
+                                                <div class="h6 font-weight-normal mb-2">Total Spareparts</div>
                                                 <div class="col-md-12 m-0 p-0 d-flex flex-row align-items-center flex-0">
                                                     <div class="d-block">
                                                         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -260,7 +260,7 @@ $_SESSION['page-name']="Console";$_SESSION['page-to']="./";
                             <div class="col-12 col-xl-12 mb-4 mt-3" id="repair-reviews">
                             <?php }?>
                                 <?php if (mysqli_num_rows($news_reviews) == 0) { ?>
-                                    <div class="card shadow mb-3">
+                                    <div class="card border-light shadow mb-3 bg-<?= $bgMode?> <?= $colorMode?>">
                                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-start">
                                             <h6 class="m-0 font-weight-bold">Repair Data</h6>
                                         </div>

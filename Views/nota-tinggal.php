@@ -1,5 +1,8 @@
 <?php require_once("../Application/controller/script.php");
 require_once("../Application/controller/redirectUser.php");
+if(isset($_GET['garansi']) && isset($_GET['id'])){
+    $notaGaransi=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_GET['garansi']))));
+    $id_userGaransi=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_GET['id']))));}
 $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
 ?>
 <!DOCTYPE html>
@@ -7,7 +10,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
     <head><?php require_once("../Application/access/header-back.php")?></head>
     <body id="page-top">
         <?php require_once("../Application/access/topNav.php");?>
-        <div class="container-fluid bg-soft">
+        <div class="container-fluid bg-<?= $bgMode?>">
             <div class="row">
                 <div class="col-12">
                     <?php require_once("../Application/access/sideNavbar.php")?>
@@ -15,19 +18,21 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                         <?php require_once("../Application/access/topNavbar.php");if($_SESSION['id-role']<=3){?>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="btn-toolbar dropdown">
-                                <button class="btn btn-primary btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-<?= $btnMode?> btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="fas fa-plus mr-2"></span>New Task
                                 </button>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2">
+                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2 bg-<?= $bgMode?>">
                                     <?php foreach($newTask as $row):?>
-                                    <a class="dropdown-item font-weight-bold text-dark" href="<?= $row['url']?>"><i class="<?= $row['icon']?> text-dark"></i></span> <?= $row['title']?></a>
+                                    <a class="dropdown-item font-weight-bold <?= $colorMode?>" href="<?= $row['url']?>"><i class="<?= $row['icon']?> <?= $colorMode?>"></i></span> <?= $row['title']?></a>
                                     <?php endforeach;?>
                                 </div>
                             </div>
+                            <?php if($_SESSION['id-role']<=2){?>
                             <div class="btn-group">
-                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-primary">Usage Procedure</button>
-                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-primary">Report</button>
+                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Usage Procedure</button>
+                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Report</button>
                             </div>
+                            <?php }?>
                         </div>
                         <?php }?>
 
@@ -35,14 +40,14 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                             <div class="row">
                                 <div class="col-md-12 mb-n3">
                                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                        <small class="mb-0"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
+                                        <small class="mb-0 <?= $colorMode?>"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
                                         <div>
 
                                             <!-- == Search == -->
                                                 <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#search"><i class="fas fa-search"></i> Search</button>
                                                 <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Find what you're looking for</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -51,7 +56,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                 <p class="text-center">Silakan masukan kata yang ingin dicari di salah satu form pencarian</p>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="number" name="note" class="form-control" placeholder="Cari Nota Tinggal">
+                                                                        <input type="number" name="note" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari Nota Tinggal">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-nota-tinggal"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -60,7 +65,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                 <?php if($_SESSION['id-role']==3){if($_SESSION['id-category']==1){?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" name="hp" class="form-control" placeholder="Cari handphone">
+                                                                        <input type="text" name="hp" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari handphone">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-hp-tinggal"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -69,7 +74,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                 <?php }if($_SESSION['id-category']==2){?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" name="laptop" class="form-control" placeholder="Cari laptop">
+                                                                        <input type="text" name="laptop" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari laptop">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-laptop-tinggal"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -78,7 +83,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                 <?php }}else if($_SESSION['id-role']!=3){?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" name="hp" class="form-control" placeholder="Cari handphone">
+                                                                        <input type="text" name="hp" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari handphone">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-hp-tinggal"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -86,7 +91,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                 </form>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" name="laptop" class="form-control" placeholder="Cari laptop">
+                                                                        <input type="text" name="laptop" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari laptop">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-laptop-tinggal"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -95,7 +100,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                 <?php }?>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="date" name="tgl" class="form-control" placeholder="Tanggal">
+                                                                        <input type="date" name="tgl" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Tanggal">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-date-tinggal"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -112,7 +117,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                 <button type="button" class="btn btn-success btn-sm shadow ml-2" data-toggle="modal" data-target="#new"><i class="fas fa-plus"></i> New</button>
                                                 <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Masukan Data</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -120,53 +125,55 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                 </button>
                                                             </div>
                                                             <form action="" method="POST">
+                                                                <input type="hidden" name="nota-garansi" value="<?php if(isset($_GET['garansi']) || isset($_GET['id'])){echo $notaGaransi;}?>">
+                                                                <input type="hidden" name="id-user-garansi" value="<?php if(isset($_GET['garansi']) || isset($_GET['id'])){echo $id_userGaransi;}?>">
                                                                 <div class="modal-body">
                                                                     <p>Masukan data untuk nota tinggal ataupun nota dp disini.</p>
                                                                     <div class='form-group'>
-                                                                        <input type="number" name="nota-tinggal" placeholder="Nomor nota tinggal" class="form-control text-center" required>
+                                                                        <input type="number" name="nota-tinggal" placeholder="Nomor nota tinggal" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                         <small class="text-danger">Wajib*</small>
                                                                     </div>
                                                                     <div class='form-group mt-3'>
-                                                                        <input type="number" name="nota-dp" placeholder="Nomor nota dp" class="form-control text-center">
+                                                                        <input type="number" name="nota-dp" placeholder="Nomor nota dp" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <small class="text-info">Jika ada isikan!</small>
                                                                     </div>
                                                                     <div class='form-group mt-3'>
-                                                                        <input type="text" name="username" placeholder="Nama pengguna" class="form-control text-center" required>
+                                                                        <input type="text" name="username" placeholder="Nama pengguna" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                         <small class="text-danger">Wajib*</small>
                                                                     </div>
                                                                     <div class='form-group mt-3'>
-                                                                        <input type="email" name="email" placeholder="Alamat email" class="form-control text-center">
+                                                                        <input type="email" name="email" placeholder="Alamat email" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <small class="text-info">Jika diinginkan!</small>
                                                                     </div>
                                                                     <div class='form-group mt-3'>
-                                                                        <input type="number" name="tlpn" placeholder="Nomor hp/tlpn" class="form-control text-center" required>
+                                                                        <input type="number" name="tlpn" placeholder="Nomor hp/tlpn" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                         <small class="text-danger">Wajib*</small>
                                                                     </div>
                                                                     <div class='form-group mt-3'>
-                                                                        <input type="text" name="alamat" placeholder="Alamat" class="form-control text-center">
+                                                                        <input type="text" name="alamat" placeholder="Alamat" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                     </div>
                                                                     <?php if($_SESSION['id-role']==3){if($_SESSION['id-category']==1){?>
                                                                         <input type="hidden" name="id-layanan" value="1">
                                                                         <div class="form-group mt-3">
-                                                                            <input type="text" name="type" placeholder="Type" class="form-control text-center">
+                                                                            <input type="text" name="type" placeholder="Type" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         </div>
                                                                         <div class="form-group mt-3">
-                                                                            <input type="text" name="seri-hp" placeholder="Seri" class="form-control text-center">
+                                                                            <input type="text" name="seri-hp" placeholder="Seri" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         </div>
                                                                         <div class="form-group mt-3">
-                                                                            <input type="text" name="imei" placeholder="Imei" class="form-control text-center">
+                                                                            <input type="text" name="imei" placeholder="Imei" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         </div>
                                                                     <?php }if($_SESSION['id-category']==2){?>
                                                                         <input type="hidden" name="id-layanan" value="2">
                                                                         <div class="form-group mt-3">
-                                                                            <input type="text" name="merek" placeholder="Merek" class="form-control text-center">
+                                                                            <input type="text" name="merek" placeholder="Merek" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         </div>
                                                                         <div class="form-group mt-3">
-                                                                            <input type="text" name="seri-laptop" placeholder="Seri" class="form-control text-center">
+                                                                            <input type="text" name="seri-laptop" placeholder="Seri" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         </div>
                                                                     <?php }}else if($_SESSION['id-role']!=3){?>
                                                                     <div class='form-group mt-3'>
-                                                                        <select name="id-layanan" class="form-control" required>
+                                                                        <select name="id-layanan" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                             <option>Pilih layanan</option>
                                                                             <?php foreach($category_services as $row_layanan):?>
                                                                                 <option value="<?= $row_layanan['id_category']?>"><?= $row_layanan['product']?></option>
@@ -177,44 +184,44 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                     <div class="row mt-3 text-center">
                                                                         <h6 class="font-weight-bold"><span class="badge bg-warning">Perhatian!</span> Mengisi sesui dengan layanan yang dipilih!</h6>
                                                                         <div class="col-lg-6">
-                                                                            <button class="btn btn-link btn-sm font-weight-bold" type="button" data-toggle="collapse" data-target="#handphone" aria-expanded="false" aria-controls="handphone">Handphone</button>
+                                                                            <button class="btn btn-link btn-sm font-weight-bold <?= $colorMode?>" type="button" data-toggle="collapse" data-target="#handphone" aria-expanded="false" aria-controls="handphone">Handphone</button>
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <button class="btn btn-link btn-sm font-weight-bold" type="button" data-toggle="collapse" data-target="#laptop" aria-expanded="false" aria-controls="laptop">Laptop</button>
+                                                                            <button class="btn btn-link btn-sm font-weight-bold <?= $colorMode?>" type="button" data-toggle="collapse" data-target="#laptop" aria-expanded="false" aria-controls="laptop">Laptop</button>
                                                                         </div>
                                                                     </div>
                                                                     <div class="collapse" id="handphone">
                                                                         <div class="form-group mt-3">
-                                                                            <input type="text" name="type" placeholder="Type" class="form-control text-center">
+                                                                            <input type="text" name="type" placeholder="Type" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         </div>
                                                                         <div class="form-group mt-3">
-                                                                            <input type="text" name="seri-hp" placeholder="Seri" class="form-control text-center">
+                                                                            <input type="text" name="seri-hp" placeholder="Seri" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         </div>
                                                                         <div class="form-group mt-3">
-                                                                            <input type="text" name="imei" placeholder="Imei" class="form-control text-center">
+                                                                            <input type="text" name="imei" placeholder="Imei" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         </div>
                                                                     </div>
                                                                     <div class="collapse" id="laptop">
                                                                         <div class="form-group mt-3">
-                                                                            <input type="text" name="merek" placeholder="Merek" class="form-control text-center">
+                                                                            <input type="text" name="merek" placeholder="Merek" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         </div>
                                                                         <div class="form-group mt-3">
-                                                                            <input type="text" name="seri-laptop" placeholder="Seri" class="form-control text-center">
+                                                                            <input type="text" name="seri-laptop" placeholder="Seri" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         </div>
                                                                     </div>
                                                                     <?php }?>
                                                                     <div class='form-group mt-3'>
-                                                                        <input type="text" name="kerusakan" placeholder="Kerusakan" class="form-control text-center" required>
+                                                                        <input type="text" name="kerusakan" placeholder="Kerusakan" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                         <small class="text-danger">Wajib*</small>
                                                                     </div>
                                                                     <div class='form-group mt-3'>
-                                                                        <input type="text" name="kondisi" placeholder="Kondisi" class="form-control text-center">
+                                                                        <input type="text" name="kondisi" placeholder="Kondisi" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                     </div>
                                                                     <div class='form-group mt-3'>
-                                                                        <input type="text" name="kelengkapan" placeholder="Kelengkapan" class="form-control text-center">
+                                                                        <input type="text" name="kelengkapan" placeholder="Kelengkapan" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                     </div>
                                                                     <div class='form-group mt-3'>
-                                                                        <select name="id-teknisi" class="form-control" required>
+                                                                        <select name="id-teknisi" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                             <option>Pilih teknisi</option>
                                                                             <?php foreach($users_teknisi as $row_teknisi):?>
                                                                                 <option value="<?= $row_teknisi['id_user']?>"><?= $row_teknisi['first_name']?></option>
@@ -224,19 +231,21 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                     </div>
                                                                     <div class='form-group mt-3'>
                                                                         <label for="tgl-ambil">Tgl Ambil</label>
-                                                                        <input type="date" name="tgl-ambil" id="tgl-ambil" class="form-control text-center">
+                                                                        <input type="date" name="tgl-ambil" id="tgl-ambil" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                     </div>
+                                                                    <?php if(!isset($_GET['garansi']) || !isset($_GET['id'])){?>
                                                                     <div class='form-group mt-3'>
-                                                                        <input type="number" name="dp" placeholder="DP" class="form-control text-center">
+                                                                        <input type="number" name="dp" placeholder="DP" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <small class="text-info">Jika ada nota dp!</small>
                                                                     </div>
                                                                     <div class='form-group mt-3'>
-                                                                        <input type="number" name="biaya" placeholder="Biaya" class="form-control text-center" required>
+                                                                        <input type="number" name="biaya" placeholder="Biaya" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <small class="text-danger">Wajib*</small>
                                                                     </div>
+                                                                    <?php }?>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                    <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                                     <button type="submit" name="submit-notes" class="btn btn-success btn-sm shadow"><i class="fas fa-plus"></i> Repair</button>
                                                                 </div>
                                                             </form>
@@ -257,9 +266,9 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                         <!-- == Nota Tinggal == -->
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="card shadow" style="overflow-x: auto">
+                                    <div class="card shadow border-light bg-<?= $bgMode?>" style="overflow-x: auto">
                                         <div class="card-body">
-                                            <table class="table table-sm text-center">
+                                            <table class="table table-sm text-center <?= $colorMode?>">
                                                 <thead>
                                                     <tr style="border-top:hidden">
                                                         <th scope="col">#</th>
@@ -268,6 +277,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                         <?php }?>
                                                         <th scope="col">#Nota Tinggal</th>
                                                         <th scope="col">#Nota DP</th>
+                                                        <th scope="col">#Nota Garansi</th>
                                                         <th scope="col">QR/Barcode</th>
                                                         <th scope="col">Client</th>
                                                         <th scope="col">Layanan</th>
@@ -292,7 +302,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                 <tbody>
                                                     <?php $total_dp=0; $total_biaya=0; $no=1; if(mysqli_num_rows($notes_views_all)==0){?>
                                                     <tr>
-                                                        <th colspan="<?php if($_SESSION['id-role']<=2){?>18<?php }else{?>16<?php }?>">Belum ada data yang dimasukan hari ini!</th>
+                                                        <th colspan="<?php if($_SESSION['id-role']<=2){?>19<?php }else{?>17<?php }?>">Belum ada data yang dimasukan hari ini!</th>
                                                     </tr>
                                                     <?php }else if(mysqli_num_rows($notes_views_all)>0){while($row=mysqli_fetch_assoc($notes_views_all)){?>
                                                     <tr>
@@ -302,7 +312,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                             <button type="button" class="btn btn-warning btn-sm shadow" data-toggle="modal" data-target="#ubah<?= $row['id_data']?>"><i class="fas fa-pen"></i> Ubah</button>
                                                             <div class="modal fade" id="ubah<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Ubah data T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -316,39 +326,39 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                             <div class="modal-body">
                                                                                 <div class='form-group'>
                                                                                     <label>Nota Tinggal</label>
-                                                                                    <input type="number" name="nota-tinggal" value="<?= $row['id_nota_tinggal']?>" placeholder="Nomor nota tinggal" class="form-control text-center" required>
+                                                                                    <input type="number" name="nota-tinggal" value="<?= $row['id_nota_tinggal']?>" placeholder="Nomor nota tinggal" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
                                                                                     <label>Nota DP</label>
-                                                                                    <input type="number" name="nota-dp" value="<?= $row['id_nota_dp']?>" placeholder="Nomor nota dp" class="form-control text-center">
+                                                                                    <input type="number" name="nota-dp" value="<?= $row['id_nota_dp']?>" placeholder="Nomor nota dp" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                 </div>
                                                                                 <?php if($_SESSION['id-role']==3){$id_barang=$row['id_barang']; if($_SESSION['id-category']==1){$handphone=mysqli_query($conn_back, "SELECT * FROM handphone WHERE id_hp='$id_barang'");$row_hp=mysqli_fetch_assoc($handphone);?>
                                                                                     <input type="hidden" name="id-layanan" value="1">
                                                                                     <div class="form-group mt-3">
                                                                                         <label>Type</label>
-                                                                                        <input type="text" name="type" value="<?= $row_hp['type']?>" placeholder="Type" class="form-control text-center">
+                                                                                        <input type="text" name="type" value="<?= $row_hp['type']?>" placeholder="Type" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     </div>
                                                                                     <div class="form-group mt-3">
                                                                                         <label>Seri</label>
-                                                                                        <input type="text" name="seri-hp" value="<?= $row_hp['seri']?>" placeholder="Seri" class="form-control text-center">
+                                                                                        <input type="text" name="seri-hp" value="<?= $row_hp['seri']?>" placeholder="Seri" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     </div>
                                                                                     <div class="form-group mt-3">
                                                                                         <label>Imei</label>
-                                                                                        <input type="text" name="imei" value="<?= $row_hp['imei']?>" placeholder="Imei" class="form-control text-center">
+                                                                                        <input type="text" name="imei" value="<?= $row_hp['imei']?>" placeholder="Imei" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     </div>
                                                                                 <?php }if($_SESSION['id-category']==2){$laptop=mysqli_query($conn_back, "SELECT * FROM laptop WHERE id_laptop='$id_barang'");$row_laptop=mysqli_fetch_assoc($laptop);?>
                                                                                     <input type="hidden" name="id-layanan" value="2">
                                                                                     <div class="form-group mt-3">
                                                                                         <label>Merek</label>
-                                                                                        <input type="text" name="merek" value="<?= $row_laptop['merek']?>" placeholder="Merek" class="form-control text-center">
+                                                                                        <input type="text" name="merek" value="<?= $row_laptop['merek']?>" placeholder="Merek" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     </div>
                                                                                     <div class="form-group mt-3">
                                                                                         <label>Seri</label>
-                                                                                        <input type="text" name="seri-laptop" value="<?= $row_laptop['seri']?>" placeholder="Seri" class="form-control text-center">
+                                                                                        <input type="text" name="seri-laptop" value="<?= $row_laptop['seri']?>" placeholder="Seri" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     </div>
                                                                                 <?php }}else if($_SESSION['id-role']!=3){?>
                                                                                 <div class='form-group mt-3'>
-                                                                                    <select name="id-layanan" class="form-control" required>
+                                                                                    <select name="id-layanan" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                         <option>Pilih layanan</option>
                                                                                         <?php foreach($category_services as $row_layanan):?>
                                                                                             <option value="<?= $row_layanan['id_category']?>"><?= $row_layanan['product']?></option>
@@ -358,51 +368,51 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                                 <div class="row mt-3 text-center">
                                                                                     <h6 class="font-weight-bold"><span class="badge bg-warning">Perhatian!</span> Mengisi sesui dengan layanan yang dipilih!</h6>
                                                                                     <div class="col-lg-6">
-                                                                                        <button class="btn btn-link btn-sm font-weight-bold" type="button" data-toggle="collapse" data-target="#handphone" aria-expanded="false" aria-controls="handphone">Handphone</button>
+                                                                                        <button class="btn btn-link btn-sm font-weight-bold <?= $colorMode?>" type="button" data-toggle="collapse" data-target="#handphone" aria-expanded="false" aria-controls="handphone">Handphone</button>
                                                                                     </div>
                                                                                     <div class="col-lg-6">
-                                                                                        <button class="btn btn-link btn-sm font-weight-bold" type="button" data-toggle="collapse" data-target="#laptop" aria-expanded="false" aria-controls="laptop">Laptop</button>
+                                                                                        <button class="btn btn-link btn-sm font-weight-bold <?= $colorMode?>" type="button" data-toggle="collapse" data-target="#laptop" aria-expanded="false" aria-controls="laptop">Laptop</button>
                                                                                     </div>
                                                                                 </div>
                                                                                 <?php $id_barang=$row['id_barang']; if($row['id_layanan']==1){
                                                                                 $handphone=mysqli_query($conn_back, "SELECT * FROM handphone WHERE id_hp='$id_barang'");$row_hp=mysqli_fetch_assoc($handphone);?>
                                                                                 <div class="collapse" id="handphone">
                                                                                     <div class="form-group mt-3">
-                                                                                        <input type="text" name="type" value="<?= $row_hp['type']?>" placeholder="Type" class="form-control text-center">
+                                                                                        <input type="text" name="type" value="<?= $row_hp['type']?>" placeholder="Type" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     </div>
                                                                                     <div class="form-group mt-3">
-                                                                                        <input type="text" name="seri-hp" value="<?= $row_hp['seri']?>" placeholder="Seri" class="form-control text-center">
+                                                                                        <input type="text" name="seri-hp" value="<?= $row_hp['seri']?>" placeholder="Seri" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     </div>
                                                                                     <div class="form-group mt-3">
-                                                                                        <input type="text" name="imei" value="<?= $row_hp['imei']?>" placeholder="Imei" class="form-control text-center">
+                                                                                        <input type="text" name="imei" value="<?= $row_hp['imei']?>" placeholder="Imei" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     </div>
                                                                                 </div>
                                                                                 <?php }else if($row['id_layanan']==2){
                                                                                 $laptop=mysqli_query($conn_back, "SELECT * FROM laptop WHERE id_laptop='$id_barang'");$row_laptop=mysqli_fetch_assoc($laptop);?>
                                                                                 <div class="collapse" id="laptop">
                                                                                     <div class="form-group mt-3">
-                                                                                        <input type="text" name="merek" value="<?= $row_laptop['merek']?>" placeholder="Merek" class="form-control text-center">
+                                                                                        <input type="text" name="merek" value="<?= $row_laptop['merek']?>" placeholder="Merek" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     </div>
                                                                                     <div class="form-group mt-3">
-                                                                                        <input type="text" name="seri-laptop" value="<?= $row_laptop['seri']?>" placeholder="Seri" class="form-control text-center">
+                                                                                        <input type="text" name="seri-laptop" value="<?= $row_laptop['seri']?>" placeholder="Seri" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     </div>
                                                                                 </div>
                                                                                 <?php }}?>
                                                                                 <div class='form-group mt-3'>
                                                                                     <label>Kerusakan</label>
-                                                                                    <input type="text" name="kerusakan" value="<?= $row['kerusakan']?>" placeholder="Kerusakan" class="form-control text-center" required>
+                                                                                    <input type="text" name="kerusakan" value="<?= $row['kerusakan']?>" placeholder="Kerusakan" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
                                                                                     <label>Kondisi</label>
-                                                                                    <input type="text" name="kondisi" value="<?= $row['kondisi']?>" placeholder="Kondisi" class="form-control text-center">
+                                                                                    <input type="text" name="kondisi" value="<?= $row['kondisi']?>" placeholder="Kondisi" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
                                                                                     <label>Kelengkapan</label>
-                                                                                    <input type="text" name="kelengkapan" value="<?= $row['kelengkapan']?>" placeholder="Kelengkapan" class="form-control text-center">
+                                                                                    <input type="text" name="kelengkapan" value="<?= $row['kelengkapan']?>" placeholder="Kelengkapan" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
                                                                                     <label>Pilih Teknisi</label>
-                                                                                    <select name="id-teknisi" class="form-control" required>
+                                                                                    <select name="id-teknisi" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                         <option>Pilih teknisi</option>
                                                                                         <?php foreach($users_teknisi as $row_teknisi):?>
                                                                                             <option value="<?= $row_teknisi['id_user']?>"><?= $row_teknisi['first_name']?></option>
@@ -411,19 +421,19 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
                                                                                     <label for="tgl-ambil">Tgl Ambil</label>
-                                                                                    <input type="date" name="tgl-ambil" value="<?= $row['tgl_ambil']?>" id="tgl-ambil" class="form-control text-center">
+                                                                                    <input type="date" name="tgl-ambil" value="<?= $row['tgl_ambil']?>" id="tgl-ambil" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
                                                                                     <label>Biaya DP</label>
-                                                                                    <input type="number" name="dp" value="<?= $row['dp']?>" placeholder="DP" class="form-control text-center">
+                                                                                    <input type="number" name="dp" value="<?= $row['dp']?>" placeholder="DP" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                 </div>
                                                                                 <div class='form-group mt-3'>
                                                                                     <label>Biaya Perbaikan</label>
-                                                                                    <input type="number" name="biaya" value="<?= $row['biaya']?>" placeholder="Biaya" class="form-control text-center" required>
+                                                                                    <input type="number" name="biaya" value="<?= $row['biaya']?>" placeholder="Biaya" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                                <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                                                 <button type="submit" name="edit-notes" class="btn btn-warning btn-sm shadow"><i class="fas fa-pen"></i> Ubah</button>
                                                                             </div>
                                                                         </form>
@@ -435,7 +445,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                             <button type="button" class="btn btn-danger btn-sm shadow" data-toggle="modal" data-target="#delete<?= $row['id_data']?>"><i class="fas fa-trash"></i> Hapus</button>
                                                             <div class="modal fade" id="delete<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header border-bottom-0">
                                                                             <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -444,7 +454,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                             <p>Yakin ingin menghapus nota dengan nomor T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?>?</p>
                                                                         </div>
                                                                         <div class="modal-footer border-0 m-auto">
-                                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
+                                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Keluar</button>
                                                                             <form action="" method="POST">
                                                                                 <input type="hidden" name="id-data" value="<?= $row['id_data']?>">
                                                                                 <input type="hidden" name="id-user" value="<?= $row['id_user']?>">
@@ -461,11 +471,12 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                         <?php }?>
                                                         <td>T<?= $row['id_nota_tinggal']?></td>
                                                         <td>DP<?= $row['id_nota_dp']?></td>
+                                                        <td><?= $row['nota_garansi']?></td>
                                                         <td>
                                                             <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#barcode<?= $row['id_data']?>"><i class="fas fa-qrcode"></i></button>
                                                             <div class="modal fade" id="barcode<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Barcode T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -475,7 +486,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                             <img src="../Assets/img/img-qrcode-notes/<?= $row['barcode']?>" alt="barcode" style="width: 40%">
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
+                                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Keluar</button>
                                                                             <form action="" method="POST">
                                                                                 <input type="hidden" name="id-user" value="<?= $row['id_user']?>">
                                                                                 <input type="hidden" name="barcode-old" value="<?= $row['barcode']?>">
@@ -491,7 +502,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                             <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#users<?= $row['id_data']?>"><i class="fas fa-eye"></i> <?= $row['first_name']?></button>
                                                             <div class="modal fade" id="users<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Users T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -512,7 +523,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                 <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#handphone<?= $row['id_data']?>"><i class="fas fa-eye"></i> <?= $row['product']?></button>
                                                                 <div class="modal fade" id="handphone<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
+                                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title" id="exampleModalLabel">Handphone T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -532,7 +543,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                 <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#laptop<?= $row['id_data']?>"><i class="fas fa-eye"></i> <?= $row['product']?></button>
                                                                 <div class="modal fade" id="laptop<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
+                                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title" id="exampleModalLabel">Laptop T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -553,7 +564,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                             <button type="button" class="btn btn-warning btn-sm shadow" data-toggle="modal" data-target="#status<?= $row['id_data']?>" style="width: 100px"><i class="fas fa-star-half"></i> <marquee behavior="" width="60" direction="left" scrolldelay="300" class="m-auto"><?= $row['status']?></marquee></button>
                                                             <div class="modal fade" id="status<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Status T<?= $row['id_nota_tinggal']?> | DP<?= $row['id_nota_dp']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -562,7 +573,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                             <input type="hidden" name="id-data" value="<?= $row['id_data']?>">
                                                                             <div class="modal-body">
                                                                                 <div class="form-group">
-                                                                                    <select name="id-status" class="form-control">
+                                                                                    <select name="id-status" class="form-control bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                         <option>Pilih Status</option>
                                                                                         <?php foreach($notesStatus as $row_status):?>
                                                                                         <option value="<?= $row_status['id_status']?>"><?= $row_status['status']?></option>
@@ -571,7 +582,7 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
+                                                                                <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Keluar</button>
                                                                                 <button type="submit" name="ubah-status-NT" class="btn btn-warning btn-sm shadow"><i class="fas fa-pen"></i> Ubah</button>
                                                                             </div>
                                                                         </form>
@@ -592,7 +603,15 @@ $_SESSION['page-name']="Nota Tinggal";$_SESSION['page-to']="nota-tinggal";
                                                         <td><?= $row['kelengkapan']?></td>
                                                         <td>Rp. <?= number_format($row['dp'])?></td>
                                                         <td>Rp. <?= number_format($row['biaya'])?></td>
-                                                    <?php $total_dp += $row['dp']; $total_biaya += $row['biaya']; $no++; }}?>
+                                                    </tr>
+                                                    <?php $total_dp += $row['dp']; $total_biaya += $row['biaya']; $no++; }}if($_SESSION['id-role']<=2){?>
+                                                    <tr>
+                                                        <th>Total</th>
+                                                        <th colspan="17"></th>
+                                                        <th>Rp. <?= number_format($total_dp)?></th>
+                                                        <th>Rp. <?= number_format($total_biaya)?></th>
+                                                    </tr>
+                                                    <?php }?>
                                                 </tbody>
                                             </table>
                                             <nav class="small mt-3" aria-label="Page navigation example">

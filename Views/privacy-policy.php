@@ -7,7 +7,7 @@ $_SESSION['page-name']="Privacy Policy";$_SESSION['page-to']="privacy-policy";
     <head><?php require_once("../Application/access/header-back.php")?></head>
     <body id="page-top">
         <?php require_once("../Application/access/topNav.php");?>
-        <div class="container-fluid bg-soft">
+        <div class="container-fluid bg-<?= $bgMode?>">
             <div class="row">
                 <div class="col-12">
                     <?php require_once("../Application/access/sideNavbar.php")?>
@@ -15,19 +15,21 @@ $_SESSION['page-name']="Privacy Policy";$_SESSION['page-to']="privacy-policy";
                         <?php require_once("../Application/access/topNavbar.php");if($_SESSION['id-role']<=3){?>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="btn-toolbar dropdown">
-                                <button class="btn btn-primary btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-<?= $btnMode?> btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="fas fa-plus mr-2"></span>New Task
                                 </button>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2">
+                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2 bg-<?= $bgMode?>">
                                     <?php foreach($newTask as $row):?>
-                                    <a class="dropdown-item font-weight-bold text-dark" href="<?= $row['url']?>"><i class="<?= $row['icon']?> text-dark"></i></span> <?= $row['title']?></a>
+                                    <a class="dropdown-item font-weight-bold <?= $colorMode?>" href="<?= $row['url']?>"><i class="<?= $row['icon']?> <?= $colorMode?>"></i></span> <?= $row['title']?></a>
                                     <?php endforeach;?>
                                 </div>
                             </div>
+                            <?php if($_SESSION['id-role']<=2){?>
                             <div class="btn-group">
-                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-primary">Usage Procedure</button>
-                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-primary">Report</button>
+                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Usage Procedure</button>
+                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Report</button>
                             </div>
+                            <?php }?>
                         </div>
                         <?php }?>
 
@@ -35,11 +37,11 @@ $_SESSION['page-name']="Privacy Policy";$_SESSION['page-to']="privacy-policy";
                             <div class="row">
                                 <div class="col-md-12 mb-n3">
                                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                        <small class="mb-0"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
+                                        <small class="mb-0 <?= $colorMode?>"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
                                         <button type="button" class="btn btn-success btn-sm shadow" data-toggle="modal" data-target="#new-privacy"><i class="fas fa-plus"></i> New</button>
                                         <div class="modal fade" id="new-privacy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
+                                                <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Insert Privacy Policy</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -50,11 +52,11 @@ $_SESSION['page-name']="Privacy Policy";$_SESSION['page-to']="privacy-policy";
                                                         <div class="modal-body">
                                                             <p class="small">Masukan kebijakan privasi untuk mengatur keapsahan pengguna sebagai pemakai layanan UGD HP.</p>
                                                             <div class="form-group">
-                                                                <textarea name="privacy-policy" cols="30" rows="5" placeholder="Masukan Kebijakan" class="form-control" required></textarea>
+                                                                <textarea name="privacy-policy" cols="30" rows="5" placeholder="Masukan Kebijakan" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                             <button type="submit" name="submit-privacy" class="btn btn-success btn-sm shadow"><i class="fas fa-plus"></i> Tambah</button>
                                                         </div>
                                                     </form>
@@ -72,8 +74,8 @@ $_SESSION['page-name']="Privacy Policy";$_SESSION['page-to']="privacy-policy";
                             <div class="row">
                                 <div class="col-lg-12">
                                     <?php if(mysqli_num_rows($privacy_policy)==0){?>
-                                        <div class="card card-body shadow">
-                                            <table class="table table-sm text-center">
+                                        <div class="card card-body shadow border-light bg-<?= $bgMode?>">
+                                            <table class="table table-sm text-center <?= $colorMode?>">
                                                 <thead>
                                                     <tr style="border:hidden">
                                                         <th scope="col"><h3>Privacy Policy</h3></th>
@@ -87,8 +89,8 @@ $_SESSION['page-name']="Privacy Policy";$_SESSION['page-to']="privacy-policy";
                                             </table>
                                         </div>
                                     <?php }else if(mysqli_num_rows($privacy_policy)>0){while($row=mysqli_fetch_assoc($privacy_policy)){?>
-                                        <div class="card card-body shadow">
-                                            <table class="table table-sm text-center">
+                                        <div class="card card-body shadow border-light bg-<?= $bgMode?>">
+                                            <table class="table table-sm text-center <?= $colorMode?>">
                                                 <thead>
                                                     <tr style="border:hidden">
                                                         <th scope="col"><h3>Privacy Policy</h3></th>
@@ -99,7 +101,7 @@ $_SESSION['page-name']="Privacy Policy";$_SESSION['page-to']="privacy-policy";
                                                         <td><form action="" method="POST">
                                                             <input type="hidden" name="id-pp" value="<?= $row['id_pp']?>">
                                                             <div class="form-group">
-                                                                <textarea name="privacy-policy" cols="30" rows="10" class="form-control"><?= $row['privacy_policy']?></textarea>
+                                                                <textarea name="privacy-policy" cols="30" rows="10" class="form-control bg-<?= $bgMode?> <?= $colorMode?>"><?= $row['privacy_policy']?></textarea>
                                                             </div>
                                                             <div class="row justify-content-center mt-3">
                                                                 <div class="col-lg-1">
@@ -112,7 +114,7 @@ $_SESSION['page-name']="Privacy Policy";$_SESSION['page-to']="privacy-policy";
                                                                         <button type="button" class="btn btn-danger btn-sm shadow" data-toggle="modal" data-target="#hapus"><i class="fas fa-trash"></i> Hapus</button>
                                                                         <div class="modal fade" id="hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                             <div class="modal-dialog" role="document">
-                                                                                <div class="modal-content">
+                                                                                <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     <div class="modal-header border-bottom-0">
                                                                                         <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -123,7 +125,7 @@ $_SESSION['page-name']="Privacy Policy";$_SESSION['page-to']="privacy-policy";
                                                                                         <p>Yakin ingin menghapus kebijakan privasi?</p>
                                                                                     </div>
                                                                                     <div class="modal-footer border-top-0 m-auto">
-                                                                                        <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Tidak</button>
+                                                                                        <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Tidak</button>
                                                                                         <button type="submit" name="delete-privacy" class="btn btn-danger btn-sm shadow"><i class="fas fa-trash"></i> Hapus</button>
                                                                                     </div>
                                                                                 </div>

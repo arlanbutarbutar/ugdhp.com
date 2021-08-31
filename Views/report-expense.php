@@ -7,7 +7,7 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
     <head><?php require_once("../Application/access/header-back.php")?></head>
     <body id="page-top">
         <?php require_once("../Application/access/topNav.php");?>
-        <div class="container-fluid bg-soft">
+        <div class="container-fluid bg-<?= $bgMode?>">
             <div class="row">
                 <div class="col-12">
                     <?php require_once("../Application/access/sideNavbar.php")?>
@@ -15,19 +15,21 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                         <?php require_once("../Application/access/topNavbar.php");if($_SESSION['id-role']<=3){?>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="btn-toolbar dropdown">
-                                <button class="btn btn-primary btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-<?= $btnMode?> btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="fas fa-plus mr-2"></span>New Task
                                 </button>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2">
+                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2 bg-<?= $bgMode?>">
                                     <?php foreach($newTask as $row):?>
-                                    <a class="dropdown-item font-weight-bold text-dark" href="<?= $row['url']?>"><i class="<?= $row['icon']?> text-dark"></i></span> <?= $row['title']?></a>
+                                    <a class="dropdown-item font-weight-bold <?= $colorMode?>" href="<?= $row['url']?>"><i class="<?= $row['icon']?> <?= $colorMode?>"></i></span> <?= $row['title']?></a>
                                     <?php endforeach;?>
                                 </div>
                             </div>
+                            <?php if($_SESSION['id-role']<=2){?>
                             <div class="btn-group">
-                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-primary">Usage Procedure</button>
-                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-primary">Report</button>
+                                <button type="submit" name="use-procedure" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Usage Procedure</button>
+                                <button type="submit" name="report-generate" class="btn btn-sm btn-outline-<?= $btnMode?> <?= $colorMode?>">Report</button>
                             </div>
+                            <?php }?>
                         </div>
                         <?php }?>
 
@@ -35,14 +37,14 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                             <div class="row">
                                 <div class="col-md-12 mb-n3">
                                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                        <small class="mb-0"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
+                                        <small class="mb-0 <?= $colorMode?>"><i class="fas fa-angle-right"></i> <a href="./" class="text-decoration-none">Console</a> <i class="fas fa-angle-right"></i> <?= $_SESSION['page-name']?></small>
                                         <div>
 
                                             <!-- == Search == -->
                                                 <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#search"><i class="fas fa-search"></i> Search</button>
                                                 <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Find what you're looking for</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -50,7 +52,7 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                             <div class="modal-body">
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" name="expense" class="form-control" placeholder="Cari">
+                                                                        <input type="text" name="expense" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-expense"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -58,7 +60,7 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                                 </form>
                                                                 <form action="" method="POST">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="date" name="date" class="form-control" placeholder="Cari">
+                                                                        <input type="date" name="date" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari">
                                                                         <div class="input-group-append">
                                                                             <button class="btn btn-outline-info border-top-left-radius-0 border-bottom-left-radius-0" type="submit" name="search-date-expense"><i class="fas fa-search"></i></button>
                                                                         </div>
@@ -74,7 +76,7 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                 <button type="button" class="btn btn-success btn-sm shadow ml-2" data-toggle="modal" data-target="#new"><i class="fas fa-plus"></i> New</button>
                                                 <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Masukan Data</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -85,20 +87,20 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                                 <div class="modal-body">
                                                                     <p>Masukan data pengeluaran.</p>
                                                                     <div class='form-group'>
-                                                                        <input type="text" name="jenis" placeholder="Jenis Pengeluaran" class="form-control text-center" required>
+                                                                        <input type="text" name="jenis" placeholder="Jenis Pengeluaran" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                         <small class="text-danger">Wajib*</small>
                                                                     </div>
                                                                     <div class='form-group'>
-                                                                        <input type="text" name="ket" placeholder="Keterangan" class="form-control text-center">
+                                                                        <input type="text" name="ket" placeholder="Keterangan" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <small class="text-info">Jika ada!</small>
                                                                     </div>
                                                                     <div class='form-group'>
-                                                                        <input type="number" name="biaya" placeholder="Biaya" class="form-control text-center" required>
+                                                                        <input type="number" name="biaya" placeholder="Biaya" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                         <small class="text-danger">Wajib*</small>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                    <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                                     <button type="submit" name="submit-expense" class="btn btn-success btn-sm shadow"><i class="fas fa-plus"></i> Lapor</button>
                                                                 </div>
                                                             </form>
@@ -118,9 +120,9 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                         <!-- == Report Expense == -->
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="card shadow" style="overflow-x: auto">
+                                    <div class="card shadow border-light bg-<?= $bgMode?>" style="overflow-x: auto">
                                         <div class="card-body">
-                                            <table class="table table-sm text-center">
+                                            <table class="table table-sm text-center <?= $colorMode?>">
                                                 <thead>
                                                     <tr style="border-top:hidden">
                                                         <th scope="col">#</th>
@@ -153,7 +155,7 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                             <button type="button" class="btn btn-warning btn-sm shadow" data-toggle="modal" data-target="#ubah<?= $row['id_pengeluaran']?>"><i class="fas fa-pen"></i> Ubah</button>
                                                             <div class="modal fade" id="ubah<?= $row['id_pengeluaran']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header border-bottom-0">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Ubah <?= $row['jenis_pengeluaran']?></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -163,20 +165,20 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                                             <input type="hidden" name="tgl-cari" value="<?= $row['tgl_cari']?>">
                                                                             <div class="modal-body">
                                                                                 <div class='form-group'>
-                                                                                    <input type="text" name="jenis" value="<?= $row['jenis_pengeluaran']?>" placeholder="Jenis Pengeluaran" class="form-control text-center" required>
+                                                                                    <input type="text" name="jenis" value="<?= $row['jenis_pengeluaran']?>" placeholder="Jenis Pengeluaran" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                     <small class="text-danger">Wajib*</small>
                                                                                 </div>
                                                                                 <div class='form-group'>
-                                                                                    <input type="text" name="ket" value="<?= $row['ket']?>" placeholder="Keterangan" class="form-control text-center">
+                                                                                    <input type="text" name="ket" value="<?= $row['ket']?>" placeholder="Keterangan" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>">
                                                                                     <small class="text-info">Jika ada!</small>
                                                                                 </div>
                                                                                 <div class='form-group'>
-                                                                                    <input type="number" name="biaya" value="<?= $row['biaya_pengeluaran']?>" placeholder="Biaya" class="form-control text-center" required>
+                                                                                    <input type="number" name="biaya" value="<?= $row['biaya_pengeluaran']?>" placeholder="Biaya" class="form-control text-center bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                     <small class="text-danger">Wajib*</small>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer border-0 m-auto">
-                                                                                <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Batal</button>
+                                                                                <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Batal</button>
                                                                                 <button type="submit" name="edit-expense" class="btn btn-warning btn-sm shadow"><i class="fas fa-pen"></i> Ubah</button>
                                                                             </div>
                                                                         </form>
@@ -188,7 +190,7 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                             <button type="button" class="btn btn-danger btn-sm shadow" data-toggle="modal" data-target="#delete<?= $row['id_pengeluaran']?>"><i class="fas fa-trash"></i> Hapus</button>
                                                             <div class="modal fade" id="delete<?= $row['id_pengeluaran']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
                                                                         <div class="modal-header border-bottom-0">
                                                                             <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -197,7 +199,7 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                                             <p>Yakin ingin menghapus <?= $row['jenis_pengeluaran']?>?</p>
                                                                         </div>
                                                                         <div class="modal-footer border-0 m-auto">
-                                                                            <button type="button" class="btn btn-outline-dark btn-sm shadow" data-dismiss="modal">Keluar</button>
+                                                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Keluar</button>
                                                                             <form action="" method="POST">
                                                                                 <input type="hidden" name="id-pengeluaran" value="<?= $row['id_pengeluaran']?>">
                                                                                 <input type="hidden" name="tgl-cari" value="<?= $row['tgl_cari']?>">
@@ -208,7 +210,14 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                                 </div>
                                                             </div>
                                                         </td>
+                                                    </tr>
                                                     <?php $total_pengeluaran += $row['biaya_pengeluaran']; $no++; }}?>
+                                                    <tr>
+                                                        <th>Total</th>
+                                                        <th colspan="2"></th>
+                                                        <th>Rp. <?= number_format($total_pengeluaran)?></th>
+                                                        <th colspan="4"></th>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                             <nav class="small mt-3" aria-label="Page navigation example">

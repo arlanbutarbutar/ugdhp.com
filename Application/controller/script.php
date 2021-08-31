@@ -263,7 +263,10 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                 if(isset($_SESSION['message-danger'])){unset($_SESSION['message-danger']);}
                 if(isset($_SESSION['message-dark'])){unset($_SESSION['message-dark']);}
                 unset($_SESSION['time-alert']);
-            }}}
+            }}}   
+        if(isset($_POST['close-message-special'])){
+            if((time()-$_SESSION['time-message'])>10){
+            unset($_SESSION['message-special']);}}
     // => end of Alert
 
     $id_user=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_SESSION['id-user']))));
@@ -1204,8 +1207,9 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
             if(new_suplayer($_POST)>0){
                 $_SESSION['message-success']="Berhasil menambahkan suplayer baru.";
                 $_SESSION['time-message']=time();
-                header("Location: report-spareparts");exit;
-            }
+                header("Location: report-spareparts");exit;}}
+        if(isset($_POST['pakai-garansi'])){
+            
         }
     }
     // => Technician
@@ -1489,6 +1493,13 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
     if($_SESSION['id-role']<=5){}
     // => Web Client Services
     if($_SESSION['id-role']<=6){
+        if(isset($_POST['dark-mode'])){
+            if(darkMode($_POST)>0){
+                header("Location: ".$_SESSION['page-to']);exit;}}
+        $user_darkMode=mysqli_query($conn_back, "SELECT * FROM users JOIN dark_mode ON users.id_darkMode=dark_mode.id_mode WHERE users.id_user='$id_user'");
+        $rowMode=mysqli_fetch_assoc($user_darkMode);
+        if($rowMode['id_darkMode']==2){$colorMode="text-white";$bgMode="dark";$btnMode="white";}
+        else if($rowMode['id_darkMode']==1){$colorMode="text-primary";$bgMode="soft";$btnMode="primary";}
         $user_views_profile=mysqli_query($conn_back, "SELECT * FROM users WHERE id_user='$id_user'");
         $userIcon=mysqli_query($conn_back, "SELECT * FROM users WHERE id_user=$id_user");
         $myProfile=mysqli_query($conn_back, "SELECT * FROM users JOIN users_role ON users.id_role=users_role.id_role WHERE users.id_user='$id_user'");

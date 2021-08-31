@@ -58,6 +58,9 @@
                                                         document.getElementById("garansi").innerHTML = "EXPIRED";}
                                                 }, 1000);
                                             </script>
+                                            <?php if(isset($_SESSION['id-user'])){if($_SESSION['id-role']<=3){$dateNow=date('M d, Y h:i:s'); if($row['garansi']>$dateNow){?>
+                                                <a href="Views/nota-tinggal?garansi=<?php if($row['id_nota_dp']>0){echo "DP".$row['id_nota_dp'];}else{if($row['id_nota_tinggal']>0){echo "T".$row['id_nota_tinggal'];}else{if($row['id_nota_lunas']>0){echo "L".$row['id_nota_lunas'];}}}?>&id=<?= $row['id_user']?>" class="btn btn-info btn-sm shadow text-decoration-none"><i class="fas fa-spell-check"></i> Pakai</a>
+                                            <?php }}}?>
                                         </div>
                                     </div>
                                     <?php }}?>

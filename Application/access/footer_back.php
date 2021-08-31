@@ -1,7 +1,7 @@
 <footer class="footer section py-5">
     <div class="row">
         <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-            <p class="mb-0 text-center text-xl-left">Powered by <a class="text-primary font-weight-normal" href="http://47.74.65.71" target="_blank">Netmedia Framecode</a></p>
+            <p class="mb-0 text-center text-xl-left <?= $colorMode?>">Powered by <a class="<?= $colorMode?> font-weight-normal" href="http://47.74.65.71" target="_blank">Netmedia Framecode</a></p>
         </div>
     </div>
 </footer>
