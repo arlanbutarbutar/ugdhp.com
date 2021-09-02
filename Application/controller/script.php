@@ -262,11 +262,10 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                 if(isset($_SESSION['message-warning'])){unset($_SESSION['message-warning']);}
                 if(isset($_SESSION['message-danger'])){unset($_SESSION['message-danger']);}
                 if(isset($_SESSION['message-dark'])){unset($_SESSION['message-dark']);}
-                unset($_SESSION['time-alert']);
-            }}}   
+                unset($_SESSION['time-alert']);}}}   
         if(isset($_POST['close-message-special'])){
-            if((time()-$_SESSION['time-message'])>10){
-            unset($_SESSION['message-special']);}}
+            // if((time()-$_SESSION['time-message'])>5){
+                if(isset($_SESSION['message-special'])){unset($_SESSION['message-special']);}}
     // => end of Alert
 
     $id_user=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_SESSION['id-user']))));
@@ -950,8 +949,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     JOIN category_services ON notes.id_layanan=category_services.id_category
                     JOIN notes_status ON notes.id_status=notes_status.id_status 
                     JOIN laptop ON notes.id_barang=laptop.id_laptop
-                    WHERE laptop.merek='$keyword' OR laptop.seri='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC
-                    LIMIT $awal_data11, $data11");}
+                    WHERE laptop.merek='$keyword' OR laptop.seri='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC");}
             if(isset($_POST['search-date-report'])!=""){
                 $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['tgl']))));
                 $report_days=mysqli_query($conn_back, "SELECT * FROM notes 
@@ -999,8 +997,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     JOIN users ON notes.id_user=users.id_user 
                     JOIN category_services ON notes.id_layanan=category_services.id_category
                     JOIN notes_status ON notes.id_status=notes_status.id_status 
-                    WHERE notes.id_nota_tinggal='$keyword' OR notes.id_nota_dp='$keyword' OR notes.id_nota_lunas='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC
-                    LIMIT $awal_data11, $data11");}
+                    WHERE notes.id_nota_tinggal='$keyword' OR notes.id_nota_dp='$keyword' OR notes.id_nota_lunas='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC");}
             if(isset($_POST['search-hp-report'])!=""){
                 $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['hp']))));
                 $report_days=mysqli_query($conn_back, "SELECT * FROM notes 
@@ -1009,8 +1006,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     JOIN category_services ON notes.id_layanan=category_services.id_category
                     JOIN notes_status ON notes.id_status=notes_status.id_status 
                     JOIN handphone ON notes.id_barang=handphone.id_hp
-                    WHERE handphone.type='$keyword' OR handphone.seri='$keyword' OR handphone.imei='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC
-                    LIMIT $awal_data11, $data11");}
+                    WHERE handphone.type='$keyword' OR handphone.seri='$keyword' OR handphone.imei='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC");}
             if(isset($_POST['search-laptop-report'])!=""){
                 $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['laptop']))));
                 $report_days=mysqli_query($conn_back, "SELECT * FROM notes 
@@ -1019,8 +1015,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     JOIN category_services ON notes.id_layanan=category_services.id_category
                     JOIN notes_status ON notes.id_status=notes_status.id_status 
                     JOIN laptop ON notes.id_barang=laptop.id_laptop
-                    WHERE laptop.merek='$keyword' OR laptop.seri='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC
-                    LIMIT $awal_data11, $data11");}
+                    WHERE laptop.merek='$keyword' OR laptop.seri='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC");}
             if(isset($_POST['search-date-report'])!=""){
                 $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['tgl']))));
                 $report_days=mysqli_query($conn_back, "SELECT * FROM notes 
@@ -1028,8 +1023,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     JOIN users ON notes.id_user=users.id_user 
                     JOIN category_services ON notes.id_layanan=category_services.id_category
                     JOIN notes_status ON notes.id_status=notes_status.id_status 
-                    WHERE notes.tgl_cari='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC
-                    LIMIT $awal_data11, $data11");}
+                    WHERE notes.tgl_cari='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC");}
             if(isset($_POST['search-month-report'])!=""){
                 $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['bulan']))));
                 $report_days=mysqli_query($conn_back, "SELECT * FROM notes 
@@ -1037,8 +1031,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     JOIN users ON notes.id_user=users.id_user 
                     JOIN category_services ON notes.id_layanan=category_services.id_category
                     JOIN notes_status ON notes.id_status=notes_status.id_status 
-                    WHERE date_format(notes.tgl_cari, '%Y-%m')='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC
-                    LIMIT $awal_data11, $data11");}
+                    WHERE date_format(notes.tgl_cari, '%Y-%m')='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC");}
             if(isset($_POST['search-tech-report'])!=""){
                 $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['id-teknisi']))));
                 $report_days=mysqli_query($conn_back, "SELECT * FROM notes 
@@ -1046,8 +1039,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     JOIN users ON notes.id_user=users.id_user 
                     JOIN category_services ON notes.id_layanan=category_services.id_category
                     JOIN notes_status ON notes.id_status=notes_status.id_status 
-                    WHERE notes.id_pegawai='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC
-                    LIMIT $awal_data11, $data11");}
+                    WHERE notes.id_pegawai='$keyword' AND notes.id_nota='5' ORDER BY notes.id_data DESC");}
         }
         // ==> Report Expense
         $data12=25;
@@ -1173,26 +1165,26 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                 header("Location: report-spareparts");exit;}}
         $statusSparepart=mysqli_query($conn_back, "SELECT * FROM status_spareparts WHERE id_status<=3");
         if(isset($_POST['stok-sparepart'])){
-            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.status_sparepart=1 ORDER BY laporan_spareparts.id_sparepart DESC LIMIT $awal_data13, $data13");}
+            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.status_sparepart=1 ORDER BY laporan_spareparts.id_sparepart DESC");}
         if(isset($_POST['pakai-sparepart'])){
-            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.status_sparepart=2 ORDER BY laporan_spareparts.id_sparepart DESC LIMIT $awal_data13, $data13");}
+            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.status_sparepart=2 ORDER BY laporan_spareparts.id_sparepart DESC");}
         if(isset($_POST['search-status-sparepart'])){
             $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['id-status']))));
-            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.status_sparepart='$keyword' ORDER BY laporan_spareparts.id_sparepart DESC LIMIT $awal_data13, $data13");}
+            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.status_sparepart='$keyword' ORDER BY laporan_spareparts.id_sparepart DESC");}
         if(isset($_POST['search-sparepart'])){
             $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['sparepart']))));
-            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.ket='$keyword' OR laporan_spareparts.suplayer='$keyword' ORDER BY laporan_spareparts.id_sparepart DESC LIMIT $awal_data13, $data13");}
+            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.ket='$keyword' OR laporan_spareparts.suplayer='$keyword' ORDER BY laporan_spareparts.id_sparepart DESC");}
         if(isset($_POST['search-date-sparepart'])){
             $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['date']))));
-            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.tgl_beli='$keyword' ORDER BY laporan_spareparts.id_sparepart DESC LIMIT $awal_data13, $data13");}
+            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.tgl_beli='$keyword' ORDER BY laporan_spareparts.id_sparepart DESC");}
         if(isset($_POST['search-dateLn-sparepart'])){
             $keyword1=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['date1']))));
             $keyword2=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['date2']))));
-            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.tgl_beli BETWEEN '$keyword1' AND '$keyword2' ORDER BY laporan_spareparts.id_sparepart DESC LIMIT $awal_data13, $data13");}
+            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.tgl_beli BETWEEN '$keyword1' AND '$keyword2' ORDER BY laporan_spareparts.id_sparepart DESC");}
         if(isset($_POST['search-temonth-sparepart'])){
             $keyword1=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['id-pegawai']))));
             $keyword2=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['month']))));
-            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.id_pegawai='$keyword1' AND date_format(laporan_spareparts.tgl_beli, '%Y-%m')='$keyword2' ORDER BY laporan_spareparts.id_sparepart DESC LIMIT $awal_data13, $data13");}
+            $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.id_pegawai='$keyword1' AND date_format(laporan_spareparts.tgl_beli, '%Y-%m')='$keyword2' ORDER BY laporan_spareparts.id_sparepart DESC");}
         if($_SESSION['id-role']==3){
             $selectNoteSparepart=mysqli_query($conn_back, "SELECT * FROM notes JOIN category_services ON notes.id_layanan=category_services.id_category WHERE id_nota='1' OR id_nota='2' OR id_nota='3' ORDER BY id_data DESC LIMIT 50");
             if(isset($_POST['search-noteSpareparts']) || !empty($_POST['search-noteSpareparts'])){
@@ -1208,9 +1200,6 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                 $_SESSION['message-success']="Berhasil menambahkan suplayer baru.";
                 $_SESSION['time-message']=time();
                 header("Location: report-spareparts");exit;}}
-        if(isset($_POST['pakai-garansi'])){
-            
-        }
     }
     // => Technician
     if($_SESSION['id-role']<=4){
@@ -1293,8 +1282,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     JOIN category_services ON notes.id_layanan=category_services.id_category
                     JOIN notes_status ON notes.id_status=notes_status.id_status 
                     JOIN handphone ON notes.id_barang=handphone.id_hp
-                    WHERE handphone.type='$keyword' OR handphone.seri='$keyword' OR handphone.imei='$keyword' AND notes.id_nota='3' ORDER BY notes.id_nota_lunas DESC
-                    LIMIT $awal_data8, $data8");}
+                    WHERE handphone.type='$keyword' OR handphone.seri='$keyword' OR handphone.imei='$keyword' AND notes.id_nota='3' ORDER BY notes.id_nota_lunas DESC");}
             if(isset($_POST['search-laptop-lunas'])!=""){
                 $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['laptop']))));
                 $notes_lunas_views_all=mysqli_query($conn_back, "SELECT * FROM notes 
@@ -1302,8 +1290,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     JOIN category_services ON notes.id_layanan=category_services.id_category
                     JOIN notes_status ON notes.id_status=notes_status.id_status 
                     JOIN laptop ON notes.id_barang=laptop.id_laptop
-                    WHERE laptop.merek='$keyword' OR laptop.seri='$keyword' AND notes.id_nota='3' ORDER BY notes.id_nota_lunas DESC
-                    LIMIT $awal_data8, $data8");}
+                    WHERE laptop.merek='$keyword' OR laptop.seri='$keyword' AND notes.id_nota='3' ORDER BY notes.id_nota_lunas DESC");}
             if(isset($_POST['search-date-lunas'])!=""){
                 $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['tgl']))));
                 $notes_lunas_views_all=mysqli_query($conn_back, "SELECT * FROM notes 
@@ -1435,8 +1422,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     JOIN category_services ON notes.id_layanan=category_services.id_category
                     JOIN notes_status ON notes.id_status=notes_status.id_status 
                     JOIN laptop ON notes.id_barang=laptop.id_laptop
-                    WHERE laptop.merek='$keyword' OR laptop.seri='$keyword' AND notes.id_nota='3' ORDER BY notes.id_nota_lunas DESC
-                    LIMIT $awal_data8, $data8");}
+                    WHERE laptop.merek='$keyword' OR laptop.seri='$keyword' AND notes.id_nota='3' ORDER BY notes.id_nota_lunas DESC");}
             if(isset($_POST['search-date-lunas'])!=""){
                 $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['tgl']))));
                 $notes_lunas_views_all=mysqli_query($conn_back, "SELECT * FROM notes 

@@ -1141,21 +1141,22 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
             $id_user=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-user']))));
             $id_pegawai=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-pegawai']))));
             $dp=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['dp']))));
-            if($_SESSION['id-role']==3){
-                if($dp==0){
-                    $log="Kesalahan Laporan Sparepart! Memasukan nota yang tidak ada DP.";
-                    mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
-                    $_SESSION['time-message']=time();
-                    $_SESSION['message-special']="Ops...! Nota yang dipilih tidak ada DP";
-                    header("Location: select-note?ids=$id_sparepart&jb=$jmlh_barang"); return false;}}
+            $queryStock=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts WHERE id_sparepart='$id_sparepart'");
+            $rowS=mysqli_fetch_assoc($queryStock);
+            if(preg_match('/LCD/', $rowS['ket'])){
+                if($_SESSION['id-role']==3){
+                    if($dp==0){
+                        $log="Kesalahan Laporan Sparepart! Memasukan nota yang tidak ada DP.";
+                        mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                        $_SESSION['time-message']=time();
+                        $_SESSION['message-special']="Ops...! Nota yang dipilih tidak ada DP";
+                        header("Location: select-note?ids=$id_sparepart&jb=$jmlh_barang"); return false;}}}
             $checkNotes=mysqli_query($conn_back, "SELECT * FROM notes WHERE id_user='$id_user'");
             $row=mysqli_fetch_assoc($checkNotes);
             if(!empty($row['id_nota_tinggal'])){
                 $id_nota="T".$row['id_nota_tinggal'];
             }else{
                 $id_nota="L".$row['id_nota_lunas'];}
-            $queryStock=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts WHERE id_sparepart='$id_sparepart'");
-            $rowS=mysqli_fetch_assoc($queryStock);
             if($jmlh_barang>1){
                 $cek_idSparepart=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts ORDER BY id_sparepart DESC LIMIT 1");
                 if(mysqli_num_rows($cek_idSparepart)>0){

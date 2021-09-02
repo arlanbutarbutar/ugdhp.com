@@ -262,7 +262,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $no=1; if(mysqli_num_rows($reportSpareparts)==0){?>
+                                                    <?php $totalBiaya=0; $no=1; if(mysqli_num_rows($reportSpareparts)==0){?>
                                                     <tr>
                                                         <th colspan="<?php if($_SESSION['id-role']<=2){?>16<?php }else{?>14<?php }?>">Belum ada data yang dimasukan hari ini!</th>
                                                     </tr>
@@ -451,13 +451,14 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                         <td>Rp. <?= number_format($row['jmlh_barang']*$row['harga'])?></td>
                                                         <td><?= $row['ket_plus']?></td>
                                                     </tr>
-                                                    <?php $totalBiaya += $row['jmlh_barang']*$row['harga']; $no++; }}?>
+                                                    <?php $totalBiaya += $row['jmlh_barang']*$row['harga']; $no++; }}if($_SESSION['id-role']<=2){?>
                                                     <tr>
                                                         <th>Total</th>
                                                         <th colspan="13"></th>
                                                         <th>Rp. <?= number_format($totalBiaya)?></th>
                                                         <th></th>
                                                     </tr>
+                                                    <?php }?>
                                                 </tbody>
                                             </table>
                                             <nav class="small mt-3" aria-label="Page navigation example">

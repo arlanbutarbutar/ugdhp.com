@@ -211,13 +211,14 @@ $_SESSION['page-name']="Laporan Pengeluaran";$_SESSION['page-to']="report-expens
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <?php $total_pengeluaran += $row['biaya_pengeluaran']; $no++; }}?>
+                                                    <?php $total_pengeluaran += $row['biaya_pengeluaran']; $no++; }}if($_SESSION['id-role']<=2){?>
                                                     <tr>
                                                         <th>Total</th>
                                                         <th colspan="2"></th>
                                                         <th>Rp. <?= number_format($total_pengeluaran)?></th>
                                                         <th colspan="4"></th>
                                                     </tr>
+                                                    <?php }?>
                                                 </tbody>
                                             </table>
                                             <nav class="small mt-3" aria-label="Page navigation example">
