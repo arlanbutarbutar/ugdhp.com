@@ -278,6 +278,7 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                         <th scope="col">#Nota Tinggal</th>
                                                         <th scope="col">#Nota DP</th>
                                                         <th scope="col">#Nota Lunas</th>
+                                                        <th scope="col">#Nota Garansi</th>
                                                         <th scope="col">QR/Barcode</th>
                                                         <th scope="col">Client</th>
                                                         <th scope="col">Layanan</th>
@@ -304,7 +305,7 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                 <tbody>
                                                     <?php $total_dp=0; $total_biaya=0; $no=1; if(mysqli_num_rows($notes_lunas_views_all)==0){?>
                                                     <tr>
-                                                        <th colspan="<?php if($_SESSION['id-role']<=2){?>21<?php }else{?>19<?php }?>">Belum ada data yang dimasukan hari ini!</th>
+                                                        <th colspan="<?php if($_SESSION['id-role']<=2){?>24<?php }else{?>22<?php }?>">Belum ada data yang dimasukan hari ini!</th>
                                                     </tr>
                                                     <?php }else if(mysqli_num_rows($notes_lunas_views_all)>0){while($row=mysqli_fetch_assoc($notes_lunas_views_all)){?>
                                                     <tr>
@@ -569,6 +570,7 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                                             <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Keluar</button>
                                                                             <form action="" method="POST">
                                                                                 <input type="hidden" name="id-data" value="<?= $row['id_data']?>">
+                                                                                <input type="hidden" name="id-nota-lunas" value="<?= $row['id_nota_lunas']?>">
                                                                                 <input type="hidden" name="kerusakan" value="<?= $row['kerusakan']?>">
                                                                                 <button type="submit" name="notes-report" class="btn btn-success btn-sm shadow"><i class="fas fa-check-double"></i> Lapor</button>
                                                                             </form>
@@ -581,6 +583,45 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                         <td>T<?= $row['id_nota_tinggal']?></td>
                                                         <td>DP<?= $row['id_nota_dp']?></td>
                                                         <td>L<?= $row['id_nota_lunas']?></td>
+                                                        <td>
+                                                            <?php if(!empty($row['nota_garansi'])){?>
+                                                            <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#data-garansi<?= $row['id_data']?>"><i class="fas fa-eye"></i> <?= $row['nota_garansi']?></button>
+                                                            <div class="modal fade" id="data-garansi<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Data Garansi Nota <?= $row['nota_garansi']?></h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <?php $nota_garansi=preg_replace("/[^0-9]/","",$row['nota_garansi']);$dataGaransi=mysqli_query($conn_back, "SELECT * FROM notes JOIN category_services ON notes.id_layanan=category_services.id_category WHERE id_nota_tinggal='$nota_garansi' OR id_nota_dp='$nota_garansi' OR id_nota_lunas='$nota_garansi'");$rowG=mysqli_fetch_assoc($dataGaransi);?>
+                                                                            <h6 class="card-title">Nota <?= "T".$rowG['id_nota_tinggal']."|DP".$rowG['id_nota_dp']."|L".$rowG['id_nota_lunas']?></h6>
+                                                                            <?php $id_barang=$rowG['id_barang'];if($rowG['id_layanan']==1){$hp=mysqli_query($conn_back, "SELECT * FROM handphone WHERE id_hp='$id_barang'");foreach($hp as $rowHP):?>
+                                                                            <p class="card-text"><?= $rowG['product']." - ".$rowHP['type']." (".$rowHP['seri']."|".$rowHP['imei'].")"?></p>
+                                                                            <?php endforeach;}else if($rowG['id_layanan']==2){$laptop=mysqli_query($conn_back, "SELECT * FROM laptop WHERE id_laptop='$id_barang'");foreach($laptop as $rowLaptop):?>
+                                                                            <p class="card-text"><?= $rowG['product']." - ".$rowLaptop['merek']." (".$rowLaptop['seri'].")"?></p>
+                                                                            <?php endforeach;} $id_userSP=$rowG['id_user']; $spare=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts WHERE id_user='$id_userSP'"); if(mysqli_num_rows($spare)==0){?>
+                                                                            <p class="card-text">Sparepart belum ada.</p>
+                                                                            <?php }else if(mysqli_num_rows($spare)>0){while($rowSP=mysqli_fetch_assoc($spare)){?>
+                                                                            <p class="card-text">Sparepart: <?= $rowSP['ket']." (".$rowSP['suplayer'].")"?></p>
+                                                                            <?php }}?>
+                                                                            <i class="fas fa-angle-double-down fa-2x"></i>
+                                                                            <h6 class="card-title mt-3">Nota <?= "T".$row['id_nota_tinggal']."|DP".$row['id_nota_dp']."|L".$row['id_nota_lunas']?></h6>
+                                                                            <?php $id_barang=$row['id_barang'];if($row['id_layanan']==1){$hp=mysqli_query($conn_back, "SELECT * FROM handphone WHERE id_hp='$id_barang'");foreach($hp as $rowHP):?>
+                                                                            <p class="card-text"><?= $row['product']." - ".$rowHP['type']." (".$rowHP['seri']."|".$rowHP['imei'].")"?></p>
+                                                                            <?php endforeach;}else if($row['id_layanan']==2){$laptop=mysqli_query($conn_back, "SELECT * FROM laptop WHERE id_laptop='$id_barang'");foreach($laptop as $rowLaptop):?>
+                                                                            <p class="card-text"><?= $row['product']." - ".$rowLaptop['merek']." (".$rowLaptop['seri'].")"?></p>
+                                                                            <?php endforeach;} $id_userSP=$row['id_user']; $spare=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts WHERE id_user='$id_userSP'"); if(mysqli_num_rows($spare)==0){?>
+                                                                            <p class="card-text">Sparepart belum ada.</p>
+                                                                            <?php }else if(mysqli_num_rows($spare)>0){while($rowSP=mysqli_fetch_assoc($spare)){?>
+                                                                            <p class="card-text">Sparepart: <?= $rowSP['ket']." (".$rowSP['suplayer'].")"?></p>
+                                                                            <?php }}?>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <?php }?>
+                                                        </td>
                                                         <td>
                                                             <button type="button" class="btn btn-info btn-sm shadow" data-toggle="modal" data-target="#barcode<?= $row['id_data']?>"><i class="fas fa-qrcode"></i></button>
                                                             <div class="modal fade" id="barcode<?= $row['id_data']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -706,7 +747,7 @@ $_SESSION['page-name']="Nota Lunas";$_SESSION['page-to']="nota-lunas";
                                                     <?php $total_dp += $row['dp']; $total_biaya += $row['biaya']; $no++; }}if($_SESSION['id-role']<=2){?>
                                                     <tr>
                                                         <th>Total</th>
-                                                        <th colspan="19"></th>
+                                                        <th colspan="20"></th>
                                                         <th>Rp. <?= number_format($total_dp)?></th>
                                                         <th>Rp. <?= number_format($total_biaya)?></th>
                                                         <th></th>

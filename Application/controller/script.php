@@ -505,6 +505,39 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
             $search_NCGrading=mysqli_query($conn_back, "SELECT * FROM notes WHERE date_format(notes.tgl_cari, '%Y-%m')='$keyword' AND id_nota='4'");
             $count_NCGrading=mysqli_num_rows($search_NCGrading);
         }
+        if(isset($_POST['search-all'])){
+            if(!empty($_POST['keyword-user'])){
+                $keywordUser=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['keyword-user']))));
+            }else if(empty($_POST['keyword-user'])){
+                $keywordUser=password_hash('0', PASSWORD_DEFAULT);
+            }
+            if(!empty($_POST['keyword-teknisi'])){
+                $keywordTeknisi=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['keyword-teknisi']))));
+            }else if(empty($_POST['keyword-teknisi'])){
+                $keywordTeknisi=password_hash('0', PASSWORD_DEFAULT);
+            }
+            if(!empty($_POST['keyword-nota'])){
+                $keywordNota=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['keyword-nota']))));
+            }else if(empty($_POST['keyword-nota'])){
+                $keywordNota=password_hash('0', PASSWORD_DEFAULT);
+            }
+            if(!empty($_POST['keyword-sparepart'])){
+                $keywordSparepart=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['keyword-sparepart']))));
+            }else if(empty($_POST['keyword-sparepart'])){
+                $keywordSparepart=password_hash('0', PASSWORD_DEFAULT);
+            }
+            if(!empty($_POST['keyword-tgl'])){
+                $keywordTgl=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['keyword-tgl']))));
+            }else if(empty($_POST['keyword-tgl'])){
+                $keywordTgl=password_hash('0', PASSWORD_DEFAULT);
+            }
+            if(!empty($_POST['keyword-bln'])){
+                $keywordBln=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['keyword-bln']))));
+            }else if(empty($_POST['keyword-bln'])){
+                $keywordBln=password_hash('0', PASSWORD_DEFAULT);
+            }
+            header("Location: .?sa=1&us=$keywordUser&tc=$keywordTeknisi&nt=$keywordNota&sp=$keywordSparepart&tl=$keywordTgl&bl=$keywordBln");exit;
+        }
     }
     // => Employee
     if($_SESSION['id-role']<=3){
@@ -1095,7 +1128,8 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
             $keyword=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['date']))));
             $report_expense=mysqli_query($conn_back, "SELECT * FROM laporan_pengeluaran WHERE tgl_cari='$keyword' ORDER BY id_pengeluaran DESC LIMIT $awal_data12, $data12");}
         // ==> Report Spareparts
-        $supplier=mysqli_query($conn_back, "SELECT * FROM supplier");
+        $supplier1=mysqli_query($conn_back, "SELECT * FROM supplier");
+        $supplier2=mysqli_query($conn_back, "SELECT * FROM supplier");
         if(isset($_POST['submit-sparepart'])){
             if(report_sparepart($_POST)>0){
                 $_SESSION['message-success']="Berhasil memasukan sparepart";
@@ -1107,7 +1141,7 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
         $total_page13=ceil($total13/$data13);
         $page13=(isset($_GET['page']))?$_GET['page']:1;
         $awal_data13=($data13*$page13)-$data13;
-        $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status  ORDER BY laporan_spareparts.id_sparepart DESC LIMIT $awal_data13, $data13");
+        $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status ORDER BY laporan_spareparts.id_sparepart DESC LIMIT $awal_data13, $data13");
         if(isset($_POST['remake-qrcode'])){
             if(remake_qrcode($_POST)>0){
                 $_SESSION['message-success']="Berhasil membuat ulang qrcode sparepart";
@@ -1186,15 +1220,15 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
             $keyword2=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['month']))));
             $reportSpareparts=mysqli_query($conn_back, "SELECT * FROM laporan_spareparts JOIN status_spareparts ON laporan_spareparts.status_sparepart=status_spareparts.id_status WHERE laporan_spareparts.id_pegawai='$keyword1' AND date_format(laporan_spareparts.tgl_beli, '%Y-%m')='$keyword2' ORDER BY laporan_spareparts.id_sparepart DESC");}
         if($_SESSION['id-role']==3){
-            $selectNoteSparepart=mysqli_query($conn_back, "SELECT * FROM notes JOIN category_services ON notes.id_layanan=category_services.id_category WHERE id_nota='1' OR id_nota='2' OR id_nota='3' ORDER BY id_data DESC LIMIT 50");
+            $selectNoteSparepart=mysqli_query($conn_back, "SELECT * FROM notes JOIN category_services ON notes.id_layanan=category_services.id_category WHERE notes.id_nota='1' OR notes.id_nota='3' ORDER BY notes.id_data DESC LIMIT 50");
             if(isset($_POST['search-noteSpareparts']) || !empty($_POST['search-noteSpareparts'])){
                 $id=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['note']))));
-                $selectNoteSparepart=mysqli_query($conn_back, "SELECT * FROM notes JOIN category_services ON notes.id_layanan=category_services.id_category WHERE id_nota_tinggal='$id' OR id_nota_lunas='$id' AND id_nota='1' OR id_nota='2' OR id_nota='3' ORDER BY id_data DESC");}
+                $selectNoteSparepart=mysqli_query($conn_back, "SELECT * FROM notes JOIN category_services ON notes.id_layanan=category_services.id_category WHERE notes.id_nota_tinggal='$id' OR notes.id_nota_lunas='$id' AND notes.id_nota='1' AND notes.id_nota='3' ORDER BY notes.id_data DESC");}
         }else if($_SESSION['id-role']<=2){
-            $selectNoteSparepart=mysqli_query($conn_back, "SELECT * FROM notes JOIN category_services ON notes.id_layanan=category_services.id_category WHERE id_nota='1' OR id_nota='2' OR id_nota='3' OR id_nota='5' ORDER BY id_data DESC LIMIT 50");
+            $selectNoteSparepart=mysqli_query($conn_back, "SELECT * FROM notes JOIN category_services ON notes.id_layanan=category_services.id_category WHERE notes.id_nota='1' OR notes.id_nota='3' OR notes.id_nota='5' ORDER BY notes.id_data DESC LIMIT 50");
             if(isset($_POST['search-noteSpareparts']) || !empty($_POST['search-noteSpareparts'])){
                 $id=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $_POST['note']))));
-                $selectNoteSparepart=mysqli_query($conn_back, "SELECT * FROM notes JOIN category_services ON notes.id_layanan=category_services.id_category WHERE id_nota_tinggal='$id' OR id_nota_lunas='$id' AND id_nota='1' OR id_nota='2' OR id_nota='3' OR id_nota='5' ORDER BY id_data DESC");}}
+                $selectNoteSparepart=mysqli_query($conn_back, "SELECT * FROM notes JOIN category_services ON notes.id_layanan=category_services.id_category WHERE notes.id_nota_tinggal='$id' OR notes.id_nota_lunas='$id' AND notes.id_nota='1' AND notes.id_nota='3' AND notes.id_nota='5' ORDER BY notes.id_data DESC");}}
         if(isset($_POST['tambah-suplayer'])){
             if(new_suplayer($_POST)>0){
                 $_SESSION['message-success']="Berhasil menambahkan suplayer baru.";

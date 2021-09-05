@@ -155,7 +155,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                             <div class="form-group">
                                                                                 <select name="suplayer" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                     <option>Pilih Penyuplai</option>
-                                                                                    <?php foreach($supplier as $row_sp):?>
+                                                                                    <?php foreach($supplier1 as $row_sp):?>
                                                                                     <option value="<?= $row_sp['supplier']?>"><?= $row_sp['supplier']?></option>
                                                                                     <?php endforeach;?>
                                                                                 </select>
@@ -235,7 +235,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
 
                         <?php if(isset($message_success)){echo$message_success;}if(isset($message_danger)){echo$message_danger;}if(isset($message_warning)){echo$message_warning;}if(isset($message_info)){echo$message_info;}if(isset($message_dark)){echo$message_dark;}?>
                         
-                        <!-- == Nota Tinggal == -->
+                        <!-- == Report Spareparts == -->
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="card shadow border-light bg-<?= $bgMode?>" style="overflow-x: auto">
@@ -264,7 +264,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                 <tbody>
                                                     <?php $totalBiaya=0; $no=1; if(mysqli_num_rows($reportSpareparts)==0){?>
                                                     <tr>
-                                                        <th colspan="<?php if($_SESSION['id-role']<=2){?>16<?php }else{?>14<?php }?>">Belum ada data yang dimasukan hari ini!</th>
+                                                        <th colspan="<?php if($_SESSION['id-role']<=2){?>16<?php }else{?>15<?php }?>">Belum ada data yang dimasukan hari ini!</th>
                                                     </tr>
                                                     <?php }else if(mysqli_num_rows($reportSpareparts)>0){while($row=mysqli_fetch_assoc($reportSpareparts)){?>
                                                     <tr>
@@ -289,7 +289,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                                                 <div class="form-group mt-3">
                                                                                     <select name="suplayer" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" required>
                                                                                         <option>Pilih Penyuplai</option>
-                                                                                        <?php foreach($supplier as $row_sp):?>
+                                                                                        <?php foreach($supplier2 as $row_sp):?>
                                                                                         <option value="<?= $row_sp['supplier']?>"><?= $row_sp['supplier']?></option>
                                                                                         <?php endforeach;?>
                                                                                     </select>
@@ -440,15 +440,10 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                                         <td><?= $row['time']?></td>
                                                         <?php }?>
                                                         <td><?= $row['ket']?></td>
-                                                        <td><?php if(!is_numeric($row['suplayer'])){echo $row['suplayer'];}
-                                                            else if(is_numeric($row['suplayer'])){$id_sup=$row['suplayer'];
-                                                                $supplier=mysqli_query($conn, "SELECT * FROM supplier WHERE id_supplier='$id_sup'");
-                                                                $row_sup=mysqli_fetch_assoc($supplier);
-                                                                echo $row_sup['supplier'];
-                                                        }?></td>
+                                                        <td><?= $row['suplayer']?></td>
                                                         <td><?= $row['jmlh_barang']?></td>
                                                         <td>Rp. <?= number_format($row['harga'])?></td>
-                                                        <td>Rp. <?= number_format($row['jmlh_barang']*$row['harga'])?></td>
+                                                        <td>Rp. <?php $total=number_format($row['jmlh_barang']*$row['harga']);echo $total;?></td>
                                                         <td><?= $row['ket_plus']?></td>
                                                     </tr>
                                                     <?php $totalBiaya += $row['jmlh_barang']*$row['harga']; $no++; }}if($_SESSION['id-role']<=2){?>
@@ -488,7 +483,7 @@ $_SESSION['page-name']="Laporan Spareparts";$_SESSION['page-to']="report-sparepa
                                     </div>
                                 </div>
                             </div>
-                        <!-- == end of Nota Tinggal  == -->
+                        <!-- == end of Report Spareparts  == -->
 
         <?php require_once("../Application/access/footer_back.php")?>
     </body>

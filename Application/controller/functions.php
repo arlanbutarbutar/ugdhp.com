@@ -35,7 +35,7 @@ if(!isset($_SESSION['id-user'])&&!isset($_SESSION['id-role'])){
             $last_name=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['last-name']))));
             $email=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['email']))));
             $pass=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['password']))));
-            $checkLog=mysqli_query($conn_back, "SELECT * FROM users WHERE id_log DESC LIMIT 1");
+            $checkLog=mysqli_query($conn_back, "SELECT * FROM users ORDER BY id_log DESC LIMIT 1");
             if(mysqli_num_rows($checkLog)>0){
                 $rowLog=mysqli_fetch_assoc($checkLog);
                 $id_log=$rowLog['id_log']+1;
@@ -794,23 +794,26 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     $_SESSION['time-message']=time();
                     $_SESSION['message-danger']="Email yang dimasukan sudah ada!";
                     header("Location: nota-lunas");return false;}}
-            $checkLog=mysqli_query($conn_back, "SELECT * FROM users WHERE id_log DESC LIMIT 1");
+            $checkLog=mysqli_query($conn_back, "SELECT * FROM users ORDER BY id_log DESC LIMIT 1");
             if(mysqli_num_rows($checkLog)>0){
                 $rowLog=mysqli_fetch_assoc($checkLog);
-                $id_log=$rowLog['id_log']+1;
+                $id_loged=$rowLog['id_log']+1;
             }else if(mysqli_num_rows($checkLog)==0){
-                $id_log=1;}
+                $id_loged=1;}
             if(!empty($data['bukti-tanpa-nota'])){
                 $ket_img=ket_img_lunas($data_encrypt);
-                if(!$ket_img){return false;}}
-            mysqli_query($conn_back, "INSERT INTO users(id_user,data_encrypt,first_name,email,password,phone,address,id_log,date_created) VALUES('$id_user','$data_encrypt','$username','$email','$password','$tlpn','$alamat','$id_log','$date')");
+                if(!$ket_img){return false;}
+            }else{
+                $ket_img="-";}
+            mysqli_query($conn_back, "INSERT INTO users(id_user,data_encrypt,first_name,email,password,phone,address,id_log,date_created) VALUES('$id_user','$data_encrypt','$username','$email','$password','$tlpn','$alamat','$id_loged','$date')");
             if($id_layanan==1){
                 mysqli_query($conn_back, "INSERT INTO handphone(id_hp,type,seri,imei) VALUES('$id_user','$type','$seri_hp','$imei')");
             }else if($id_layanan==2){
                 mysqli_query($conn_back, "INSERT INTO laptop(id_laptop,merek,seri) VALUES('$id_user','$merek','$seri_laptop')");}
             $garansi="";
-            $total=$biaya-$dp;
-            mysqli_query($conn_back, "INSERT INTO notes(id_nota,id_nota_lunas,id_user,id_layanan,id_barang,id_pegawai,id_status,tgl_cari,tgl_masuk,tgl_lunas,tgl_status,tgl_ambil,time,time_status,kerusakan,kondisi,kelengkapan,ket_text,ket_img,garansi,dp,biaya,total,barcode,progress) VALUES('3','$nota_lunas','$id_user','$id_layanan','$id_barang','$id_teknisi','5','$date_search','$date','$date','$date','$date','$time','$time','$kerusakan','$kondisi','$kelengkapan','$keterangan','$ket_img','$garansi','$dp','$biaya','$total','$barcode','100')");
+            if(is_numeric($biaya) && is_numeric($dp)){
+                $total=$biaya-$dp;}
+            mysqli_query($conn_back, "INSERT INTO notes(id_nota,id_nota_lunas,id_user,id_layanan,id_barang,id_pegawai,id_status,tgl_cari,tgl_masuk,tgl_lunas,tgl_status,tgl_ambil,time,time_status,kerusakan,kondisi,kelengkapan,ket_text,ket_img,garansi,dp,biaya,total,barcode,progress) VALUES('3','$nota_lunas','$id_user','$id_layanan','$id_barang','$id_teknisi','5','$date_search','$date','$date','$date','$date','$time','$time','$kerusakan','$kondisi','$kelengkapan','$keterangan','$ket_img','$garansi',$dp,$biaya,$total,'$barcode','100')");
             return mysqli_affected_rows($conn_back);}
         function barcode_notes_lunas($data_encrypt){global $link_qr;
             require_once('../Assets/phpqrcode/qrlib.php');
@@ -893,41 +896,38 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
                     $_SESSION['message-danger']="Nota Dp yang kamu masukan sudah ada!";
                     header("Location: nota-tinggal"); return false;}}
             // ==> Jika nota lunas lama tidak sama dengan yang baru
-            if($nota_lunas_old!=$nota_lunas){
+            if(!empty($nota_lunas)){
                 // ==> Jika ada nomor nota lunas
-                if(!empty($nota_lunas)){
-                    // ==> Jika nomor nota lunas masih kosong di database
-                    $checkValueLunas=mysqli_query($conn_back, "SELECT * FROM notes WHERE id_nota='3' AND id_nota_lunas>0");
-                    if(mysqli_num_rows($checkValueLunas)>0){
-                        // ==> Jika nomor urut nota lunas tidak urut
-                        $check_urut_nota=mysqli_query($conn_back, "SELECT * FROM notes ORDER BY id_nota_lunas DESC LIMIT 1");
-                        if(mysqli_num_rows($check_urut_nota)>0){
-                            $row_urut=mysqli_fetch_assoc($check_urut_nota);
-                            $id_nota_urut=$row_urut['id_nota_lunas']+1;
-                            if($id_nota_urut!=$nota_lunas){
-                                $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang kamu masukan tidak urut, Nota Lunas akhir saat ini ".$row_urut['id_nota_lunas'].".";
-                                mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
-                                $_SESSION['time-message']=time();
-                                $_SESSION['message-danger']="Nomor nota lunas yang kamu masukan tidak urut, Nota lunas akhir saat ini ".$row_urut['id_nota_lunas'].". cek kembali!";
-                                header("Location: nota-lunas"); return false;}}
-                        // ==> Jika nomor nota lunas telah mencapai batas maksimum nota fisik yang ada
-                        $notes_type_lunas=mysqli_query($conn_back, "SELECT * FROM notes_type WHERE name LIKE '%Nota Lunas%'");
-                        $row_notes_type_lunas=mysqli_fetch_assoc($notes_type_lunas);
-                        $no_nota_lunas=$row_notes_type_lunas['no_nota'];
-                        if($nota_lunas==$no_nota_lunas || $nota_lunas>$no_nota_lunas){
-                            $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang dimasukan telah mencapai batas maksimum cetak.";
+                if($nota_lunas_old!=$nota_lunas){
+                    // ==> Jika nomor urut nota lunas tidak urut
+                    $check_urut_nota=mysqli_query($conn_back, "SELECT * FROM notes ORDER BY id_nota_lunas DESC LIMIT 1");
+                    if(mysqli_num_rows($check_urut_nota)>0){
+                        $row_urut=mysqli_fetch_assoc($check_urut_nota);
+                        $id_nota_urut=$row_urut['id_nota_lunas']+1;
+                        if($id_nota_urut!=$nota_lunas){
+                            $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang kamu masukan tidak urut, Nota Lunas akhir saat ini ".$row_urut['id_nota_lunas'].".";
                             mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
                             $_SESSION['time-message']=time();
-                            $_SESSION['message-danger']="Nomor nota lunas saat ini telah mencapai batas maksimum cetak, silakan cetak nota dan jika sudah segera setting ulang nomor nota lunas!";
-                            header("Location: nota-lunas");return false;}
-                        // ==> Jika nomor nota lunas sudah ada
-                        $check_lunas=mysqli_query($conn_back, "SELECT * FROM notes WHERE id_nota_lunas='$nota_lunas'");
-                        if(mysqli_num_rows($check_lunas)>0){
-                            $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang dimasukan sudah ada dengan nomor ".$nota_lunas.".";
-                            mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
-                            $_SESSION['time-message']=time();
-                            $_SESSION['message-danger']="Nomor nota lunas yang kamu masukan sudah ada, cek kembali!";
-                            header("Location: nota-lunas");return false;}}}}
+                            $_SESSION['message-danger']="Nomor nota lunas yang kamu masukan tidak urut, Nota lunas akhir saat ini ".$row_urut['id_nota_lunas'].". cek kembali!";
+                            header("Location: nota-lunas"); return false;}}
+                    // ==> Jika nomor nota lunas telah mencapai batas maksimum nota fisik yang ada
+                    $notes_type_lunas=mysqli_query($conn_back, "SELECT * FROM notes_type WHERE name LIKE '%Nota Lunas%'");
+                    $row_notes_type_lunas=mysqli_fetch_assoc($notes_type_lunas);
+                    $no_nota_lunas=$row_notes_type_lunas['no_nota'];
+                    if($nota_lunas==$no_nota_lunas || $nota_lunas>$no_nota_lunas){
+                        $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang dimasukan telah mencapai batas maksimum cetak.";
+                        mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                        $_SESSION['time-message']=time();
+                        $_SESSION['message-danger']="Nomor nota lunas saat ini telah mencapai batas maksimum cetak, silakan cetak nota dan jika sudah segera setting ulang nomor nota lunas!";
+                        header("Location: nota-lunas");return false;}
+                    // ==> Jika nomor nota lunas sudah ada
+                    $check_lunas=mysqli_query($conn_back, "SELECT * FROM notes WHERE id_nota_lunas='$nota_lunas'");
+                    if(mysqli_num_rows($check_lunas)>0){
+                        $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang dimasukan sudah ada dengan nomor ".$nota_lunas.".";
+                        mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                        $_SESSION['time-message']=time();
+                        $_SESSION['message-danger']="Nomor nota lunas yang kamu masukan sudah ada, cek kembali!";
+                        header("Location: nota-lunas");return false;}}}
             if(!empty($nota_dp)){
                 if(empty($dp) || $dp==0){
                     $log="Kesalahan Ubah Nota DP! Nomor nota dp ".$nota_dp." sudah ada tetapi biaya dp belum dimasukan.";
@@ -957,44 +957,50 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
             $id_data=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-data']))));
             $nota_lunas_old=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-nota-lunas-old']))));
             $nota_lunas=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['nota-lunas']))));
-            // ==> Jika nota lunas lama tidak sama dengan yang baru
-            if($nota_lunas_old!=$nota_lunas){
-                // ==> Jika ada nomor nota lunas
-                if(!empty($nota_lunas)){
-                    // ==> Jika nomor nota lunas masih kosong di database
-                    $checkValueLunas=mysqli_query($conn_back, "SELECT * FROM notes WHERE id_nota='3' AND id_nota_lunas>0");
-                    if(mysqli_num_rows($checkValueLunas)>0){
-                        // ==> Jika nomor urut nota lunas tidak urut
-                        $check_urut_nota=mysqli_query($conn_back, "SELECT * FROM notes ORDER BY id_nota_lunas DESC LIMIT 1");
-                        if(mysqli_num_rows($check_urut_nota)>0){
-                            $row_urut=mysqli_fetch_assoc($check_urut_nota);
-                            $id_nota_urut=$row_urut['id_nota_lunas']+1;
-                            if($id_nota_urut!=$nota_lunas){
-                                $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang kamu masukan tidak urut, Nota Lunas akhir saat ini ".$row_urut['id_nota_lunas'].".";
+            // ==> Jika ada nomor nota lunas
+            if(!empty($nota_lunas)){
+                // ==> Jika nota lunas lama tidak sama dengan yang baru
+                if($nota_lunas_old!=$nota_lunas){
+                    // ==> Jika nomor urut nota lunas tidak urut
+                    $check_urut_nota=mysqli_query($conn_back, "SELECT * FROM notes ORDER BY id_nota_lunas DESC LIMIT 1");
+                    if(mysqli_num_rows($check_urut_nota)>0){
+                        $row_urut=mysqli_fetch_assoc($check_urut_nota);
+                        $id_nota_urut=$row_urut['id_nota_lunas']+1;
+                        if($id_nota_urut!=$nota_lunas){
+                            $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang kamu masukan tidak urut, Nota Lunas akhir saat ini ".$row_urut['id_nota_lunas'].".";
+                            mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                            $_SESSION['time-message']=time();
+                            $_SESSION['message-danger']="Nomor nota lunas yang kamu masukan tidak urut, Nota lunas akhir saat ini ".$row_urut['id_nota_lunas'].". cek kembali!";
+                            header("Location: nota-lunas"); return false;
+                        }else{
+                            // ==> Jika nomor nota lunas telah mencapai batas maksimum nota fisik yang ada
+                            $notes_type_lunas=mysqli_query($conn_back, "SELECT * FROM notes_type WHERE name LIKE '%Nota Lunas%'");
+                            $row_notes_type_lunas=mysqli_fetch_assoc($notes_type_lunas);
+                            $no_nota_lunas=$row_notes_type_lunas['no_nota'];
+                            if($nota_lunas==$no_nota_lunas || $nota_lunas>$no_nota_lunas){
+                                $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang dimasukan telah mencapai batas maksimum cetak.";
                                 mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
                                 $_SESSION['time-message']=time();
-                                $_SESSION['message-danger']="Nomor nota lunas yang kamu masukan tidak urut, Nota lunas akhir saat ini ".$row_urut['id_nota_lunas'].". cek kembali!";
-                                header("Location: nota-lunas"); return false;}}
-                        // ==> Jika nomor nota lunas telah mencapai batas maksimum nota fisik yang ada
-                        $notes_type_lunas=mysqli_query($conn_back, "SELECT * FROM notes_type WHERE name LIKE '%Nota Lunas%'");
-                        $row_notes_type_lunas=mysqli_fetch_assoc($notes_type_lunas);
-                        $no_nota_lunas=$row_notes_type_lunas['no_nota'];
-                        if($nota_lunas==$no_nota_lunas || $nota_lunas>$no_nota_lunas){
-                            $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang dimasukan telah mencapai batas maksimum cetak.";
-                            mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
-                            $_SESSION['time-message']=time();
-                            $_SESSION['message-danger']="Nomor nota lunas saat ini telah mencapai batas maksimum cetak, silakan cetak nota dan jika sudah segera setting ulang nomor nota lunas!";
-                            header("Location: nota-lunas");return false;}
-                        // ==> Jika nomor nota lunas sudah ada
-                        $check_lunas=mysqli_query($conn_back, "SELECT * FROM notes WHERE id_nota_lunas='$nota_lunas'");
-                        if(mysqli_num_rows($check_lunas)>0){
-                            $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang dimasukan sudah ada dengan nomor ".$nota_lunas.".";
-                            mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
-                            $_SESSION['time-message']=time();
-                            $_SESSION['message-danger']="Nomor nota lunas yang kamu masukan sudah ada, cek kembali!";
-                            header("Location: nota-lunas");return false;}}}}
-            mysqli_query($conn_back, "UPDATE notes SET id_nota_lunas='$nota_lunas' WHERE id_data='$id_data'");
-            return mysqli_affected_rows($conn_back);}
+                                $_SESSION['message-danger']="Nomor nota lunas saat ini telah mencapai batas maksimum cetak, silakan cetak nota dan jika sudah segera setting ulang nomor nota lunas!";
+                                header("Location: nota-lunas");return false;
+                            }else{
+                                // ==> Jika nomor nota lunas sudah ada
+                                $check_lunas=mysqli_query($conn_back, "SELECT * FROM notes WHERE id_nota_lunas='$nota_lunas'");
+                                if(mysqli_num_rows($check_lunas)>0){
+                                    $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang dimasukan sudah ada dengan nomor ".$nota_lunas.".";
+                                    mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                                    $_SESSION['time-message']=time();
+                                    $_SESSION['message-danger']="Nomor nota lunas yang kamu masukan sudah ada, cek kembali!";
+                                    header("Location: nota-lunas");return false;
+                                }else{
+                                    mysqli_query($conn_back, "UPDATE notes SET id_nota_lunas='$nota_lunas' WHERE id_data='$id_data'");
+                                    return mysqli_affected_rows($conn_back);}}}}
+                }else if($nota_lunas_old==$nota_lunas){
+                    $log="Kesalahan Input Nota Lunas! Nomor nota lunas yang kamu masukan sama dengan yang sebelumnya, Nota Lunas sebelumnya ".$nota_lunas_old.".";
+                    mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                    $_SESSION['time-message']=time();
+                    $_SESSION['message-danger']="Nomor nota lunas yang kamu masukan sama dengan yang sebelumnya, Nota Lunas sebelumnya ".$nota_lunas_old.".";
+                    header("Location: nota-lunas"); return false;}}}
         function delete_notesLunas($data){global $conn_back;
             $id_data=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-data']))));
             $id_user=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-user']))));
@@ -1038,10 +1044,18 @@ if(isset($_SESSION['id-user'])&&isset($_SESSION['id-role'])){
             }else if($id_status==7){
                 mysqli_query($conn_back, "UPDATE notes SET id_nota='4', id_status='7', tgl_status='$date', progress='5' WHERE id_data='$id_data'");
                 return mysqli_affected_rows($conn_back);}}
-        function notes_report($data){global $conn_back,$date;
+        function notes_report($data){global $conn_back,$date,$time,$id_log;
             $id_data=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-data']))));
+            $id_lunas=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['id-nota-lunas']))));
             $kerusakan=htmlspecialchars(addslashes(trim(mysqli_real_escape_string($conn_back, $data['kerusakan']))));
-            if(preg_match('/LCD/', $kerusakan)){
+            if($id_lunas==0){
+                $log="Kesalahan Input Laporan Harian! Belum ada nomor nota lunas namun diajukan ke laporan harian.";
+                mysqli_query($conn_back, "INSERT INTO users_log(id_log,log,date,time) VALUES('$id_log','$log','$date','$time')");
+                $_SESSION['time-message']=time();
+                $_SESSION['message-danger']="Cek kembali nomor nota lunas! belum ada nomor nota lunas, silakan diisi terlebih dahulu.";
+                header("Location: nota-lunas"); return false;
+            }
+            if(preg_match('LCD', $kerusakan)){
                 $expired=mktime(0,0,0,date("n"),date("j")+7,date("Y"));
                 $garansi=date("M d, Y h:i:s", $expired);
             }else{

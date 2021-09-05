@@ -118,6 +118,54 @@
                             </div>
                         </div>
                     </li> -->
+                    <?php if($_SESSION['id-role']<=2){?>
+                    <li class="nav-item ml-n2">
+                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#search-all"><i class="fas fa-search <?= $colorMode?>"></i></button>
+                        <div class="modal fade bg-<?= $bgMode?>" id="search-all" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                <div class="modal-content bg-<?= $bgMode?> <?= $colorMode?>">
+                                    <div class="modal-header border-bottom-0">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Pencarian Menyeluruh</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-input">
+                                                <input type="text" name="keyword-user" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari Pelanggan">
+                                            </div>
+                                            <div class="form-input mt-3">
+                                                <select name="keyword-teknisi" class="form-control bg-<?= $bgMode?> <?= $colorMode?>">
+                                                    <option value="">Pilih Teknisi</option>
+                                                    <?php foreach($users_teknisi as $row_teknisi):?>
+                                                        <option value="<?= $row_teknisi['id_user']?>"><?= $row_teknisi['first_name']?></option>
+                                                    <?php endforeach;?>
+                                                </select>
+                                            </div>
+                                            <div class="form-input mt-3">
+                                                <input type="number" name="keyword-nota" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari Nota">
+                                            </div>
+                                            <div class="form-input mt-3">
+                                                <input type="text" name="keyword-sparepart" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari Sparepart">
+                                            </div>
+                                            <div class="form-input mt-3">
+                                                <input type="date" name="keyword-tgl" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari Tanggal">
+                                            </div>
+                                            <div class="form-input mt-3">
+                                                <input type="month" name="keyword-bln" class="form-control bg-<?= $bgMode?> <?= $colorMode?>" placeholder="Cari Bulan">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer text-center border-top-0">
+                                            <button type="button" class="btn btn-outline-<?= $btnMode?> btn-sm shadow" data-dismiss="modal">Keluar</button>
+                                            <button type="submit" name="search-all" class="btn btn-info btn-sm shadow"><i class="fas fa-search"></i> Cari</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <?php }?>
                     <li class="nav-item ml-n2">
                         <form action="" method="POST">
                             <div class="form-group">

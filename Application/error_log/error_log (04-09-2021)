@@ -1,0 +1,266 @@
+[01-Sep-2021 08:14:27 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 10:07:06 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 10:07:39 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 13
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: userIcon in /home/hfbnsyss/public_html/Application/access/sideNavbar.php on line 5
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Warning:  Invalid argument supplied for foreach() in /home/hfbnsyss/public_html/Application/access/sideNavbar.php on line 5
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 20
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 24
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 27
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 27
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 45
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 45
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 63
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 63
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 81
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 81
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 99
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 99
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: rowMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 124
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Trying to access array offset on value of type null in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 124
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: rowMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 125
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Trying to access array offset on value of type null in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 125
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 125
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: user_views_profile in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 132
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 132
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: user_views_profile in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 134
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 134
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 142
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Application/access/topNavbar.php on line 142
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: btnMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 21
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 24
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 26
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 43
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 50
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 50
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 59
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 59
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 68
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 68
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 103
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 103
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 120
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 120
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 133
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 133
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 137
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 137
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 141
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 141
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 145
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 145
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 149
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 149
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 153
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 153
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 158
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 158
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 161
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 161
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 164
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 164
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 214
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 214
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 218
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 218
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 221
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 221
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 224
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 224
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 234
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 234
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 238
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 238
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 242
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 242
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: btnMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 248
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: bgMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 269
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: colorMode in /home/hfbnsyss/public_html/Views/nota-tinggal.php on line 271
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: ???
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Warning:  ???
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: ???
+[01-Sep-2021 11:09:04 Asia/Jakarta] PHP Notice:  Undefined variable: ???
+[01-Sep-2021 11:25:26 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 11:25:45 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 11:26:35 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 12:57:11 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 14:22:51 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 14:25:28 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 14:27:40 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 14:48:33 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 14:49:42 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 14:58:09 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 17:21:29 Asia/Jakarta] PHP Warning:  ---
+[01-Sep-2021 17:21:29 Asia/Jakarta] PHP Warning:  ---
+[01-Sep-2021 17:21:29 Asia/Jakarta] PHP Warning:  ---
+[01-Sep-2021 17:21:29 Asia/Jakarta] PHP Notice:  ---
+[01-Sep-2021 18:11:26 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:11:50 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:12:51 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:13:42 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:15:31 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:19:12 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:20:06 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:21:30 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:27:20 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:31:11 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:32:48 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:33:05 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:33:56 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:34:01 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:35:02 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:36:22 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:37:45 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:38:36 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 18:39:00 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:05:33 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:05:49 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:08:20 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:09:08 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:10:51 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:11:05 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:15:14 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:20:55 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:26:18 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:28:30 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:29:04 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:29:22 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:32:12 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 19:47:29 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 19:48:12 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 19:48:12 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 19:48:12 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 19:48:12 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 19:48:12 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 19:48:12 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 19:48:12 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 19:48:12 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 19:48:12 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 20:11:13 Asia/Jakarta] PHP Warning:  ---
+[01-Sep-2021 20:11:13 Asia/Jakarta] PHP Warning:  ---
+[01-Sep-2021 20:11:13 Asia/Jakarta] PHP Warning:  ---
+[01-Sep-2021 20:11:13 Asia/Jakarta] PHP Notice:  ---
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 20:13:27 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 20:18:32 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 20:18:40 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 20:18:46 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 20:18:53 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Warning:  ===
+[01-Sep-2021 21:16:22 Asia/Jakarta] PHP Notice:  ===
+[01-Sep-2021 21:18:23 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 12:17:29 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 12:17:29 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 12:17:29 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 12:17:29 Asia/Jakarta] PHP Notice:  ---
+[02-Sep-2021 12:19:22 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 12:19:22 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 12:19:22 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 12:19:22 Asia/Jakarta] PHP Notice:  ---
+[02-Sep-2021 12:19:53 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 12:20:01 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:47:47 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:48:00 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:50:29 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:50:43 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:50:49 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:50:57 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:52:42 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:52:52 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:52:56 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:53:04 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Notice:  Undefined variable: ???
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  ???
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Notice:  ---
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:16 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:24 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:53:34 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:53:41 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:53:48 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:53:48 Asia/Jakarta] PHP Notice:  Undefined variable: ???
+[02-Sep-2021 13:53:48 Asia/Jakarta] PHP Warning:  ???
+[02-Sep-2021 13:53:48 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:48 Asia/Jakarta] PHP Notice:  ---
+[02-Sep-2021 13:53:48 Asia/Jakarta] PHP Warning:  !!!
+[02-Sep-2021 13:53:59 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:54:22 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:54:57 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 13:54:58 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 14:24:20 Asia/Jakarta] PHP Notice:  Undefined variable: ---
+[02-Sep-2021 14:46:05 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 14:46:05 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 14:46:05 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 14:46:05 Asia/Jakarta] PHP Notice:  ---
+[02-Sep-2021 17:54:13 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 17:54:13 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 17:54:13 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 17:54:13 Asia/Jakarta] PHP Notice:  ---
+[02-Sep-2021 17:56:37 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 17:56:37 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 17:56:37 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 17:56:37 Asia/Jakarta] PHP Notice:  ---
+[02-Sep-2021 18:58:06 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 18:58:06 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 18:58:06 Asia/Jakarta] PHP Warning:  ---
+[02-Sep-2021 18:58:06 Asia/Jakarta] PHP Notice:  ---
